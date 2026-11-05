@@ -49,7 +49,7 @@ def matrix_profile(x, window: int = 32, regimes: int = 3) -> dict:
                 break
     cac, boundaries = stumpy.fluss(neighbors, L=window, n_regimes=regimes, excl_factor=1)
     return {"available": True, "n": len(a), "window": window,
-            "exclusion_zone": int(math.ceil(window / stumpy.config.STUMPY_EXCL_ZONE_DENOM)),
+            "exclusion_zone": math.ceil(window / stumpy.config.STUMPY_EXCL_ZONE_DENOM),
             "profile": [float(v) if np.isfinite(v) else None for v in distances],
             "nearest_neighbor": neighbors.tolist(), "motifs": motifs, "discords": discords,
             "corrected_arc_curve": np.asarray(cac, dtype=float).tolist(),

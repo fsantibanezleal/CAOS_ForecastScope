@@ -4,9 +4,11 @@ Finite-prefix forecasts, temporal combinations of reference experts, and sequenc
 diagnostics in a reusable Python library. The core requires NumPy. Diagnostic
 implementations use optional scientific packages through `forecastscope.diagnostics`.
 
-This is an extraction candidate. It is not yet a published PyPI dependency, and
-ChronoScope has not yet migrated to it. The extraction preserves numerical kernels
-while adding strict public request and output validation. It makes no new forecast
+Release availability is recorded on [PyPI](https://pypi.org/project/forecastscope/)
+and [GitHub](https://github.com/fsantibanezleal/CAOS_ForecastScope/releases).
+Application adoption is a separate step. The extraction preserves numerical
+equations while adding strict public request and output validation, lint
+normalization and warnings for unavailable optional diagnostics. It makes no new forecast
 accuracy, calibration, chaos-identification or operational-performance claim.
 
 ```python

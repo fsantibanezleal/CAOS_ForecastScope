@@ -57,8 +57,8 @@ def _interpret_hurst(h: float) -> str:
 
 def hurst(x) -> HurstResult:
     """Hurst exponent by rescaled-range (Anis-Lloyd corrected) and by DFA; flags short-sample unreliability."""
-    from hurst import compute_Hc
     import nolds
+    from hurst import compute_Hc
 
     a = _clean(x)
     n = len(a)
@@ -163,7 +163,7 @@ def dcca_coefficient(x, y, scale: int | None = None) -> dict:
     fa2 = fb2 = fab = 0.0
     count = 0
     t = np.arange(scale + 1, dtype=float)
-    for start in range(0, m - scale):
+    for start in range(m - scale):
         wa, wb = A[start:start + scale + 1], B[start:start + scale + 1]
         # local linear detrend
         ca = np.polyfit(t, wa, 1)
@@ -186,7 +186,7 @@ def fractal_report(x) -> dict:
     h = hurst(a)
     fd = fractal_dimension(a)
     out = {
-        "n": int(len(a)),
+        "n": len(a),
         "hurst": {"rs": h.hurst_rs, "dfa_alpha": h.dfa_alpha, "interpretation": h.interpretation,
                   "reliable": h.reliable, "reference": h.reference},
         "fractal_dimension": {"higuchi": fd.higuchi, "katz": fd.katz, "petrosian": fd.petrosian,

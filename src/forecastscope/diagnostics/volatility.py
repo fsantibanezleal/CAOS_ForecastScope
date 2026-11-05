@@ -161,7 +161,7 @@ def volatility_report(x, arch_lags: int = 12, season_length: int | None = None,
     a = _clean(x)
     at = arch_lm(a, nlags=arch_lags)
     out = {
-        "n": int(len(a)),
+        "n": len(a),
         "arch_lm": {"lm_stat": at.lm_stat, "lm_pvalue": at.lm_pvalue, "nlags": at.nlags,
                     "has_arch": at.has_arch, "reference": at.reference},
         "rolling": rolling_volatility(a, window=min(20, max(3, len(a) // 10))),

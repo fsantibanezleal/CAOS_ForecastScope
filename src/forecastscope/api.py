@@ -1,6 +1,8 @@
 """Validated entry points; legacy numerical kernels retain their original equations."""
 from __future__ import annotations
 
+from itertools import pairwise
+
 import numpy as np
 
 from .combinations.context_memory import MemoryFit, fit_context_memory
@@ -20,7 +22,7 @@ def _request(history, seasonality, horizon, quantiles):
     if seasonality >= len(y):
         raise ValueError("seasonality must be smaller than the observed history length")
     levels = tuple(float(q) for q in quantiles)
-    if not levels or not np.isfinite(levels).all() or not all(0 < q < 1 for q in levels) or not all(a < b for a, b in zip(levels, levels[1:])):
+    if not levels or not np.isfinite(levels).all() or not all(0 < q < 1 for q in levels) or not all(a < b for a, b in pairwise(levels)):
         raise ValueError("Quantiles must be finite, strictly increasing probabilities between zero and one")
     return y, int(seasonality), int(horizon), levels
 

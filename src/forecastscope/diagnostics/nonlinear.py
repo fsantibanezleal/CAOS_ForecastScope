@@ -25,6 +25,7 @@ statistic must differ from phase-randomized surrogates) before any determinism/c
 """
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass
 
 import numpy as np
@@ -242,7 +243,7 @@ def nonlinear_report(x, emb_dim: int = 4, lag: int = 1, n_surrogates: int = 19, 
             s = iaaft_surrogate(a, seed=surrogate_seed)
             surr_d2.append(chaos_measures(s, emb_dim=emb_dim, lag=lag, seed=surrogate_seed).corr_dim)
         except Exception:  # noqa: BLE001
-            pass
+            warnings.warn("Surrogate diagnostic unavailable", RuntimeWarning, stacklevel=2)
     nonlinear_detected = None
     if surr_d2:
         mu, sd = float(np.mean(surr_d2)), float(np.std(surr_d2))
@@ -250,7 +251,7 @@ def nonlinear_report(x, emb_dim: int = 4, lag: int = 1, n_surrogates: int = 19, 
         nonlinear_detected = bool(sd > 0 and cm.corr_dim < mu - 2 * sd)
     likely_chaotic = bool((cm.lyap_r > 0.01) and (k01 > 0.5) and (nonlinear_detected is True))
     return {
-        "n": int(len(a)),
+        "n": len(a),
         "seed": seed,
         "fit": "RANSAC with explicit random_state; OLS on no consensus",
         "correlation_dimension": cm.corr_dim,

@@ -1,5 +1,5 @@
 {
-  "state": "local-source-parity; installed wheel and product adoption separate",
+  "state": "installed-wheel-parity; product adoption separate",
   "source_artifact_sha256": "8b49b2fe6298bede97a209ac117389152bf1859d78e0006a96e8521ac02a16a1",
   "cases": [
     {
@@ -124,5 +124,9 @@
     }
   ],
   "total_exact_comparisons": 150,
-  "scope": "Full-precision quantile matrices, allocation weights and historical origins; no new accuracy trial"
+  "scope": "Full-precision quantile matrices, allocation weights and historical origins; no new accuracy trial",
+  "runtime": {
+    "python": "3.12.10",
+    "numpy": "2.5.4"
+  }
 }

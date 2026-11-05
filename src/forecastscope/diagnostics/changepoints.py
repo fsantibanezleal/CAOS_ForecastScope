@@ -27,6 +27,7 @@ streaming lane (preqts) and is recorded in the plan, not duplicated here.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import pairwise
 
 import numpy as np
 
@@ -51,7 +52,7 @@ class ChangePoints:
 def _segments(a: np.ndarray, bkps_first_index: list[int]) -> list[dict]:
     bounds = [0, *bkps_first_index, len(a)]
     out = []
-    for s, e in zip(bounds[:-1], bounds[1:]):
+    for s, e in pairwise(bounds):
         seg = a[s:e]
         out.append({"start": int(s), "end": int(e), "mean": float(np.mean(seg)), "std": float(np.std(seg))})
     return out
@@ -153,7 +154,7 @@ def changepoints_report(x, k_regimes: int = 2) -> dict:
     p = pelt(a)
     c = cusum_stability(a)
     out = {
-        "n": int(len(a)),
+        "n": len(a),
         "pelt": {"breakpoints": p.breakpoints, "segments": p.segments, "model": p.model,
                  "penalty": p.penalty, "reference": p.reference},
         "cusum": {"stat": c.stat, "pvalue": c.pvalue, "stable": c.stable, "reference": c.reference},

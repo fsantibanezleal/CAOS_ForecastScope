@@ -192,7 +192,7 @@ def seasonality_report(x, fs: float = 1.0, candidate_periods: list[int] | None =
     candidates = candidate_periods or []
     strengths = {int(p): float(seasonal_strength(a, int(p))) for p in candidates if int(p) >= 2}
     out = {
-        "n": int(len(a)),
+        "n": len(a),
         "periodogram": {
             "dominant_period": pg.dominant_period, "dominant_power": pg.dominant_power,
             "freqs": pg.freqs.tolist(), "power": pg.power.tolist(), "reference": pg.reference,
@@ -205,7 +205,7 @@ def seasonality_report(x, fs: float = 1.0, candidate_periods: list[int] | None =
     }
     # If the periodogram found a dominant period, also report STL strength at that period.
     if pg.dominant_period is not None and pg.dominant_period >= 2:
-        p_int = int(round(pg.dominant_period))
+        p_int = round(pg.dominant_period)
         if p_int >= 2 and len(a) >= 2 * p_int:
             out["stl_at_dominant"] = _decomp_dict(stl_decompose(a, p_int))
     return out

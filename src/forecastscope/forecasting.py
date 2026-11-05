@@ -7,13 +7,13 @@ They are repeated-prefix fits, not native incremental model-state updates.
 from __future__ import annotations
 
 import math
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 
 from .types import MethodForecast
 
-# --- normal quantile (Acklam's rational approximation; abs error < 1.15e-9) --------------------------
+# --- normal quantile: Acklam's rational approximation; not a coverage guarantee -------------------
 _A = [-3.969683028665376e01, 2.209460984245205e02, -2.759285104469687e02,
       1.383577518672690e02, -3.066479806614716e01, 2.506628277459239e00]
 _B = [-5.447609879822406e01, 1.615858368580409e02, -1.556989798598866e02,

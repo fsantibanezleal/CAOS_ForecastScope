@@ -28,6 +28,7 @@ Methods / references (verified 2026-07-04):
 """
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass
 
 import numpy as np
@@ -130,7 +131,7 @@ def complexity(x, order: int = 3, bds_dim: int = 2, alpha: float = 0.05) -> Comp
             bds_p = float(np.ravel(pval)[-1])
             iid = bool(bds_p >= alpha)
         except Exception:  # noqa: BLE001 - BDS can fail on degenerate input; record as unavailable
-            pass
+            warnings.warn("BDS diagnostic unavailable", RuntimeWarning, stacklevel=2)
     return ComplexitySummary(
         sample_entropy=samp, permutation_entropy=perm, spectral_entropy=spec,
         bds_stat=bds_stat, bds_pvalue=bds_p, iid=iid,
@@ -166,7 +167,7 @@ def distribution_report(x, order: int = 3) -> dict:
     s = summary(a)
     c = complexity(a, order=order)
     return {
-        "n": int(len(a)),
+        "n": len(a),
         "summary": {"mean": s.mean, "std": s.std, "skewness": s.skewness,
                     "kurtosis_excess": s.kurtosis_excess, "jarque_bera_pvalue": s.jarque_bera_pvalue,
                     "shapiro_pvalue": s.shapiro_pvalue, "normal": s.normal, "reference": s.reference},

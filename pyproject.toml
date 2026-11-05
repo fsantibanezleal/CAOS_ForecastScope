@@ -14,10 +14,11 @@ dependencies = ["numpy>=2.0,<3"]
 
 [project.optional-dependencies]
 diagnostics = [
-  "scipy>=1.15,<2", "statsmodels>=0.14.6,<0.15", "arch>=8,<9",
+  "scipy>=1.15,<2", "pandas>=2.3,<4", "statsmodels>=0.14.6,<0.15", "arch>=8,<9",
   "ruptures>=1.1.10,<2", "EMD-signal>=1.9,<2", "PyWavelets>=1.8,<2",
   "antropy>=0.2.2,<0.3", "nolds==0.6.3", "hurst==0.0.5", "MFDFA==0.4.3",
   "pycatch22>=0.4.5,<0.5", "stumpy>=1.14.1,<2", "scikit-learn>=1.9,<2",
+  "coreforecast>=0.0.17,<0.1",
 ]
 dev = ["pytest>=8", "ruff>=0.15,<0.17", "build", "twine"]
 

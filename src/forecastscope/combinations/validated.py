@@ -11,8 +11,8 @@ from itertools import combinations
 
 import numpy as np
 
-from .context_memory import CONFIG, _scale, context_features
 from ..forecasting import METHODS, gaussian_quantiles
+from .context_memory import CONFIG, _scale, context_features
 
 CANDIDATES = (
     ("recency", 1., 1.), ("equal", 0., 1.),
@@ -120,7 +120,7 @@ def fit_validated(y, m, h, *, stacking=True):
     y = np.asarray(y, dtype=float)
     if y.ndim != 1 or len(y) < 2 or not np.isfinite(y).all() or m < 1 or h < 1:
         raise ValueError("Finite contiguous history, positive seasonality and horizon are required")
-    origins, features, losses, errors, paths = memory(tuple(y), m, h)
+    origins, features, losses, errors, _paths = memory(tuple(y), m, h)
     candidates = CANDIDATES if stacking else tuple(c for c in CANDIDATES if c[0] != "stack")
     splits = tuple(s for s in temporal_splits(origins, h) if len(s["train"]) >= 3)
     scores = []

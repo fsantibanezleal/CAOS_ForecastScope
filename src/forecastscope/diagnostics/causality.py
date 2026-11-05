@@ -164,7 +164,7 @@ def causality_report(x, y, max_lag: int = 6) -> dict:
     g_yx = granger_causality(b, a, max_lag=max_lag)       # does y cause x?
     coint_res = cointegration(a, b)
     return {
-        "n": int(len(a)),
+        "n": len(a),
         "ccf": {"peak_lag": ccf_res.peak_lag, "peak_value": ccf_res.peak_value, "band": ccf_res.band,
                 "lead": ("x leads y" if ccf_res.peak_lag > 0 else "y leads x" if ccf_res.peak_lag < 0 else "synchronous"),
                 "reference": ccf_res.reference},

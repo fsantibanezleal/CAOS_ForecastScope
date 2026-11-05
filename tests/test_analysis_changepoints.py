@@ -1,3 +1,5 @@
+from itertools import pairwise
+
 """Change-point toolkit tests: ground truth = a series with KNOWN break locations and regimes."""
 import numpy as np
 
@@ -9,7 +11,7 @@ def _level_shifts(n=300, breaks=(100, 200), levels=(0.0, 5.0, -3.0), noise=0.5, 
     rng = np.random.default_rng(seed)
     y = np.empty(n)
     bounds = [0, *breaks, n]
-    for lvl, (s, e) in zip(levels, zip(bounds[:-1], bounds[1:])):
+    for lvl, (s, e) in zip(levels, pairwise(bounds)):
         y[s:e] = lvl
     return y + rng.normal(0, noise, n)
 

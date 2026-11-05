@@ -181,7 +181,7 @@ def filters_report(x, hp_lambda: float = 1600.0, band: tuple[int, int] = (6, 32)
     e = emd(a, max_imfs=max_imfs)
     sc = cwt_scalogram(a) if len(a) >= 8 else None
     out = {
-        "n": int(len(a)),
+        "n": len(a),
         "hp": {"lambda": hp_lambda, "trend": hp.trend.tolist(), "cycle": hp.cycle.tolist(),
                "reference": hp.reference},
         "cf": {"band": list(band), "cycle": cf.cycle.tolist(), "reference": cf.reference},

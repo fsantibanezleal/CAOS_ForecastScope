@@ -1,0 +1,57 @@
+{
+  "state": "validated-local-candidate; PyPI publication and product adoption pending",
+  "version": "0.1.0",
+  "checks": [
+    {
+      "check": "source core controls",
+      "passed": 31,
+      "python": "3.13.14",
+      "numpy": "2.4.6"
+    },
+    {
+      "check": "complete installed-wheel diagnostic and core suite",
+      "passed": 128,
+      "warnings_retained": 35,
+      "python": "3.12.10",
+      "numpy": "2.5.4"
+    },
+    {
+      "check": "isolated installed wheel without SciPy or product package",
+      "passed": 31,
+      "python": "3.12.10"
+    },
+    {
+      "check": "exact product forecast and combination comparisons",
+      "passed": 150,
+      "cases": 15
+    },
+    {
+      "check": "wheel and sdist metadata",
+      "state": "pass"
+    },
+    {
+      "check": "declared dependencies",
+      "state": "no broken requirements"
+    },
+    {
+      "check": "Ruff current source tests and parity tooling",
+      "state": "pass"
+    }
+  ],
+  "retained_failures": [
+    {
+      "check": "initial optional diagnostic suite",
+      "passed": 125,
+      "failed": 1,
+      "reason": "Missing coreforecast declaration for Guerrero seasonal Box-Cox; dependency added and complete suite rerun"
+    },
+    {
+      "check": "first current-Ruff check",
+      "reason": "New lint rules found import/order/normalization and silent optional-error handling; corrected, no rules disabled"
+    }
+  ],
+  "limits": [
+    "These are numerical and packaging controls, not a new forecasting accuracy trial",
+    "Linux CI, PyPI publication, app migration and its own release gates are separate"
+  ]
+}
