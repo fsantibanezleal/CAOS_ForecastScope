@@ -1,5 +1,5 @@
 {
-  "state": "validated-local-candidate; PyPI publication and product adoption pending",
+  "state": "published 0.1.0; app adoption pending",
   "version": "0.1.0",
   "checks": [
     {
@@ -52,6 +52,7 @@
   ],
   "limits": [
     "These are numerical and packaging controls, not a new forecasting accuracy trial",
-    "Linux CI, PyPI publication, app migration and its own release gates are separate"
-  ]
+    "PyPI publication and Linux CI are verified separately in the publication receipt; app migration and its own release gates remain pending"
+  ],
+  "publication_receipt": "docs/publication-0.1.0.json"
 }
