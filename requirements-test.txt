@@ -1,0 +1,16 @@
+numpy==2.5.4
+pandas==3.1.1
+scipy==1.18.1
+statsmodels==0.14.6
+arch==8.0.0
+EMD-signal==1.10.0
+PyWavelets==1.10.0
+antropy==0.2.3
+nolds==0.6.3
+hurst==0.0.5
+MFDFA==0.4.3
+pycatch22==0.4.5
+stumpy==1.14.1
+scikit-learn==1.9.1
+coreforecast==0.0.20
+numba==0.68.1
