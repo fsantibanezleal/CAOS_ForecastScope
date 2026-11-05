@@ -19,9 +19,12 @@ allocation = combine("ValidationMix", history, seasonality=4, horizon=8)
 print(columns.shape, allocation.weights, allocation.origins)
 ```
 
-Only observed history is accepted. Future targets belong to the caller's evaluation
+The caller supplies a contiguous observed history; raw arrays contain no timestamps,
+so contiguity itself is a caller precondition. Future targets belong to the caller's evaluation
 protocol. NaNs, infinite values, fractional horizons, invalid seasonal lags and
-unsupported probability grids are refused by the public entry points. The five
+unsupported probability grids are refused by the public entry points. The reference kernels preserve their documented short-history policies, including
+Holt fallback when additive seasonal smoothing lacks two cycles or has lag one.
+Combination experts can consequently coincide on a nonseasonal input. The five
 reference experts use approximate Gaussian residual intervals; ordered columns do
 not establish calibration. Temporal validation filters an outer-prefix-defined
 historical grid, and does not reconstruct the exact grid a historical service
