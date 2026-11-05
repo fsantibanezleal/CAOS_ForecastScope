@@ -1,0 +1,3 @@
+include VERSION CHANGELOG.md requirements-test.txt
+recursive-include docs *.md *.json
+recursive-include tools *.py
