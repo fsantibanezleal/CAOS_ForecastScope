@@ -1,0 +1,19 @@
+{
+  "state": "published registry files verified",
+  "version": "0.1.0",
+  "source_commit": "e0a65f987fbce1ee93d76f883c17d8cc6b8409da",
+  "workflow": 42121401755,
+  "verified_module_count": 19,
+  "distributions": [
+    {
+      "filename": "forecastscope-0.1.0-py3-none-any.whl",
+      "sha256": "1ad7ccd3c63edaa94c3ffb95f4c2ae06b682560cc65222b7ed76622c93b979b8",
+      "upload_time": "2026-11-05T22:26:12.869208Z"
+    },
+    {
+      "filename": "forecastscope-0.1.0.tar.gz",
+      "sha256": "c7fd0ddc5e6f4b441bff2d649c9122589d133220c4cd95d9a63cbfac98dfdd66",
+      "upload_time": "2026-11-05T22:26:14.213426Z"
+    }
+  ]
+}
