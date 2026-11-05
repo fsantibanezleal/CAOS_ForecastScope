@@ -1,0 +1,113 @@
+{
+  "source_repository": "https://github.com/fsantibanezleal/CAOS_RES_ChronoScope",
+  "source_commit": "9bda497e29f1705939e15e96e68dbd9f35a6dcfa",
+  "licence": "MIT",
+  "scope": "Initial extraction candidate; not a published dependency or product migration",
+  "files": {
+    "forecasting.py": {
+      "source_path": "data-pipeline/chronoscopelab/model/forecasters.py",
+      "source_sha256": "940c194ab85fe9d2ccbd58b89b986c1e0bb580298954f06a8793117b6469e664",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "373d0243cdf8e5fb5bb3b9d411466bb486dc6625ac8825c50815863df712f73f",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "combinations/context_memory.py": {
+      "source_path": "data-pipeline/chronoscopelab/model/context_memory.py",
+      "source_sha256": "dbafac6c79f05a562718e217113c170aac6a968ddbae6bf723e8e5e7292fc5ad",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "b20f37561e9eceb338a164a824b4bb23df83029978384335793a4d7d8da0b80d",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "combinations/validated.py": {
+      "source_path": "data-pipeline/chronoscopelab/model/validated_combination.py",
+      "source_sha256": "dfbf1940dd6bd4832e234cc2f1efb28b06d5b4f72f6006e9b49f551918c88c95",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "4bb43a8f0a325e5033844a3a0990acde68c14c31a3a324f5acbb9b53beb8171b",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/autocorrelation.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/autocorrelation.py",
+      "source_sha256": "a05b538d3d89d4a11081ab35e9ff01430157571063a5dae9af65d7127e110552",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "a05b538d3d89d4a11081ab35e9ff01430157571063a5dae9af65d7127e110552",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/causality.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/causality.py",
+      "source_sha256": "e9b8fe8bc9b64a5cadf0e7accc2fae0b322fa1511958c375828f8ffede840c01",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "e9b8fe8bc9b64a5cadf0e7accc2fae0b322fa1511958c375828f8ffede840c01",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/changepoints.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/changepoints.py",
+      "source_sha256": "dc0ce4fcb0eae8ca1b58bcf12046d09298d9807ce83e3d9344528a583b8e1466",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "dc0ce4fcb0eae8ca1b58bcf12046d09298d9807ce83e3d9344528a583b8e1466",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/distribution.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/distribution.py",
+      "source_sha256": "36d79880747d2cef9c715e84e23586014988b77eadb78acac33edf6cf3d07f42",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "36d79880747d2cef9c715e84e23586014988b77eadb78acac33edf6cf3d07f42",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/filters.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/filters.py",
+      "source_sha256": "227301d30878b6379d9588e8baa204a03a1d8d8dd4a329f90df8ac65db87741f",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "227301d30878b6379d9588e8baa204a03a1d8d8dd4a329f90df8ac65db87741f",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/fractal.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/fractal.py",
+      "source_sha256": "f1fa42f4c0676a97cde5a07ca79e9a832ae356c13451a7d46ee3859c107f3b1e",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "f1fa42f4c0676a97cde5a07ca79e9a832ae356c13451a7d46ee3859c107f3b1e",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/nonlinear.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/nonlinear.py",
+      "source_sha256": "fcbc4a473636d1dd8a6c13b5170d1d6ee977fd6dc78beb56bd2d12f2caa6f593",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "fcbc4a473636d1dd8a6c13b5170d1d6ee977fd6dc78beb56bd2d12f2caa6f593",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/seasonality.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/seasonality.py",
+      "source_sha256": "99c328fdb6b792b73485928146313e613f9c3ba354b1760e82e8bdd7e50b7cbb",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "99c328fdb6b792b73485928146313e613f9c3ba354b1760e82e8bdd7e50b7cbb",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/sequence.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/sequence.py",
+      "source_sha256": "63cf6a21ba110d08fd5bde2c9e4df2ec53a75b29ab03fba151b83be35c7420b9",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "63cf6a21ba110d08fd5bde2c9e4df2ec53a75b29ab03fba151b83be35c7420b9",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/stationarity.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/stationarity.py",
+      "source_sha256": "42490c61430e82012d163318fbf231a0a21c50b4e53ca9d2e1c58a13bf257029",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "42490c61430e82012d163318fbf231a0a21c50b4e53ca9d2e1c58a13bf257029",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/volatility.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/volatility.py",
+      "source_sha256": "38685dc0684377d816ead19cff357c75caef68c5db7038fb9c5c96ad213978c0",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "38685dc0684377d816ead19cff357c75caef68c5db7038fb9c5c96ad213978c0",
+      "function_and_class_bodies": "AST-identical to origin"
+    },
+    "diagnostics/__init__.py": {
+      "source_path": "data-pipeline/chronoscopelab/analysis/__init__.py",
+      "source_sha256": "875ba0e041f06378c91d12ac260ad30245f6404d7cb0e747e5ebb223ad991437",
+      "change": "import relocation and module documentation only; no function or class body change",
+      "extracted_sha256": "61ca22b5c6eb33191702e43b00e51eea7b17e3af5aa1283949e82d2cd2dc157b",
+      "function_and_class_bodies": "AST-identical to origin"
+    }
+  }
+}
