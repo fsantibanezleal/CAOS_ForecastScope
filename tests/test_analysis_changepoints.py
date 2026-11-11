@@ -1,6 +1,6 @@
+"""Change-point toolkit tests: ground truth = a series with KNOWN break locations and regimes."""
 from itertools import pairwise
 
-"""Change-point toolkit tests: ground truth = a series with KNOWN break locations and regimes."""
 import numpy as np
 
 from forecastscope.diagnostics import changepoints as cp

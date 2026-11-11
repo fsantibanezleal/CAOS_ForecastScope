@@ -71,24 +71,30 @@ class GarchFit:
     persistence: float                   # sum(alpha)+sum(beta): near 1 => shocks persist (IGARCH-like)
     loglikelihood: float
     reference: str
+    fit_scale: float = 1.0
 
 
 def garch(x, p: int = 1, q: int = 1, vol: str = "GARCH", dist: str = "normal",
           rescale: bool = True) -> GarchFit:
-    """Fit a GARCH(p,q) (or EGARCH/FIGARCH) conditional-variance model to the series' mean residuals."""
+    """Fit a GARCH-family model and return conditional volatility in the input units.
+
+    Parameters and log-likelihood use the estimation scale. The fitted input
+    is the original input multiplied by ``fit_scale``.
+    """
     from arch import arch_model
 
     a = _clean(x)
     # arch prefers series scaled to roughly unit range; rescale=True lets it handle that internally.
     model = arch_model(a, mean="Constant", vol=vol, p=p, q=q, dist=dist, rescale=rescale)
     res = model.fit(disp="off")
+    scale = float(res.scale)
     params = {k: float(v) for k, v in res.params.items()}
     # persistence: sum of the alpha[*] and beta[*] parameters (standard GARCH stationarity read-out)
     persistence = float(sum(v for k, v in params.items() if k.startswith(("alpha", "beta"))))
     return GarchFit(
         vol=vol, p=p, q=q, params=params,
-        conditional_volatility=np.asarray(res.conditional_volatility, dtype=float),
-        persistence=persistence, loglikelihood=float(res.loglikelihood),
+        conditional_volatility=np.asarray(res.conditional_volatility, dtype=float) / scale,
+        persistence=persistence, loglikelihood=float(res.loglikelihood), fit_scale=scale,
         reference="Bollerslev 1986, J. Econometrics 31(3):307-327, DOI 10.1016/0304-4076(86)90063-1",
     )
 
@@ -105,12 +111,16 @@ class BoxCoxResult:
 
 
 def _positive_shift(a: np.ndarray) -> tuple[np.ndarray, float]:
-    """Box-Cox needs y > 0; shift by (1 - min) when non-positive values are present. Record the shift."""
-    m = float(np.min(a))
-    if m <= 0:
-        shift = 1.0 - m
-        return a + shift, shift
-    return a, 0.0
+    """Make the smallest nonpositive input equal to a scale from the series."""
+    minimum = float(np.min(a))
+    if minimum > 0:
+        return a, 0.0
+    maximum = float(np.max(a))
+    reference = (maximum - minimum) or abs(minimum)
+    shift = reference - minimum
+    if not np.isfinite(shift) or shift <= 0 or maximum > np.finfo(float).max - shift:
+        raise ValueError("Box-Cox needs a representable positive scale for nonpositive inputs")
+    return a + shift, shift
 
 
 def box_cox(x, method: str = "mle", season_length: int | None = None) -> BoxCoxResult:
@@ -179,6 +189,7 @@ def volatility_report(x, arch_lags: int = 12, season_length: int | None = None,
             g = garch(a, p=garch_pq[0], q=garch_pq[1])
             out["garch"] = {"vol": g.vol, "p": g.p, "q": g.q, "params": g.params,
                             "persistence": g.persistence, "loglikelihood": g.loglikelihood,
+                            "fit_scale": g.fit_scale,
                             "reference": g.reference}
         except Exception as exc:  # noqa: BLE001
             out["garch"] = {"error": f"{type(exc).__name__}: {exc}"}

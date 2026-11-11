@@ -1,5 +1,6 @@
 """Volatility toolkit tests: ARCH detection, GARCH persistence, Box-Cox variance stabilization, Guerrero."""
 import numpy as np
+import pytest
 
 from forecastscope.diagnostics import volatility as vo
 
@@ -42,6 +43,17 @@ def test_garch_recovers_high_persistence():
     assert np.all(g.conditional_volatility > 0)
 
 
+def test_rescaled_garch_returns_volatility_in_source_units():
+    from arch import arch_model
+
+    y = _garch_series() * 1e-4
+    native = arch_model(y, mean="Constant", p=1, q=1, rescale=True).fit(disp="off")
+    result = vo.garch(y)
+    assert native.scale != 1 and result.fit_scale == native.scale
+    np.testing.assert_allclose(result.conditional_volatility * native.scale, native.conditional_volatility)
+    assert result.params == native.params.to_dict()
+
+
 def test_boxcox_mle_stabilizes_variance():
     y = _multiplicative_growth()
     bc = vo.box_cox(y, method="mle")
@@ -65,6 +77,20 @@ def test_boxcox_handles_nonpositive_with_a_recorded_shift():
     bc = vo.box_cox(y, method="log")
     assert bc.shift > 0                                  # shifted to positivity
     assert np.all(np.isfinite(bc.transformed))
+
+
+def test_boxcox_shift_tracks_positive_changes_in_source_unit():
+    y = np.array([-2., 0., 1., 3., 5., 2., 4., 6.])
+    original = vo.box_cox(y, method="log")
+    factor = 1e-5
+    converted = vo.box_cox(y * factor, method="log")
+    assert converted.shift == pytest.approx(original.shift * factor)
+    np.testing.assert_allclose(converted.transformed, original.transformed + np.log(factor))
+
+
+def test_boxcox_rejects_zero_series_without_positive_scale():
+    with pytest.raises(ValueError, match="positive scale"):
+        vo.box_cox(np.zeros(8), method="log")
 
 
 def test_report_skips_garch_when_no_arch():
