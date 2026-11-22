@@ -87,7 +87,7 @@ def seasonal_strength(x, period: int) -> float:
     from statsmodels.tsa.seasonal import STL
 
     a = _clean(x)
-    if period < 2 or len(a) < 2 * period:
+    if period < 2 or len(a) < 2 * period or np.ptp(a) == 0:
         return 0.0
     res = STL(a, period=period, robust=True).fit()
     var_r = float(np.var(res.resid))
@@ -111,9 +111,14 @@ class Decomp:
 
 
 def _strengths(trend, seasonal, remainder) -> tuple[float, float]:
-    var_r = float(np.var(remainder))
-    var_tr = float(np.var(trend + remainder))
-    var_sr = float(np.var(seasonal + remainder))
+    # Summation roundoff can make np.var(full(n, .1)) positive. An exact
+    # constant component has zero variance independently of its measurement unit.
+    def variance(values):
+        return float(np.var(values)) if np.ptp(values) > 0 else 0.0
+
+    var_r = variance(remainder)
+    var_tr = variance(trend + remainder)
+    var_sr = variance(seasonal + remainder)
     f_t = max(0.0, 1.0 - var_r / var_tr) if var_tr > 0 else 0.0
     f_s = max(0.0, 1.0 - var_r / var_sr) if var_sr > 0 else 0.0
     return f_t, f_s
@@ -127,7 +132,7 @@ def stl_decompose(x, period: int) -> Decomp:
     if period < 2 or len(a) < 2 * period:
         raise ValueError(f"STL needs len >= 2*period; got len={len(a)}, period={period}")
     res = STL(a, period=period, robust=True).fit()
-    f_t, f_s = _strengths(res.trend, res.seasonal, res.resid)
+    f_t, f_s = (0.0, 0.0) if np.ptp(a) == 0 else _strengths(res.trend, res.seasonal, res.resid)
     return Decomp(
         trend=np.asarray(res.trend, dtype=float), seasonal=np.asarray(res.seasonal, dtype=float),
         remainder=np.asarray(res.resid, dtype=float), strength_trend=f_t, strength_seasonal=f_s,
@@ -152,7 +157,7 @@ def mstl_decompose(x, periods: list[int]) -> Decomp:
     seasonal = seasonal_2d.sum(axis=1) if seasonal_2d.ndim == 2 else seasonal_2d
     trend = np.asarray(res.trend, dtype=float)
     remainder = np.asarray(res.resid, dtype=float)
-    f_t, f_s = _strengths(trend, seasonal, remainder)
+    f_t, f_s = (0.0, 0.0) if np.ptp(a) == 0 else _strengths(trend, seasonal, remainder)
     return Decomp(
         trend=trend, seasonal=seasonal, remainder=remainder, strength_trend=f_t, strength_seasonal=f_s,
         periods=tuple(periods),
