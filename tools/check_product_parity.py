@@ -24,13 +24,17 @@ def main():
     args = ap.parse_args()
     product = args.product.resolve()
     origin = json.loads((ROOT / "docs/extraction-source.json").read_text(encoding="utf-8"))
+    # The consuming app preserves exact original numerical sources in a verified
+    # immutable archive after demoting its former private distribution.
+    sys.path.insert(0, str(product / "scripts"))
+    from check_numerical_provider import reference
+    from source_bindings import verified_archive
+    _, frozen = verified_archive(product)
     for name in ("forecasting.py", "combinations/context_memory.py", "combinations/validated.py"):
         entry = origin["files"][name]
-        assert hashlib.sha256((product / entry["source_path"]).read_bytes()).hexdigest() == entry["source_sha256"], "Origin source changed"
-    sys.path.insert(0, str(product / "data-pipeline"))
-    from chronoscopelab.model import forecasters as old
-    from chronoscopelab.model.context_memory import fit_context_memory
-    from chronoscopelab.model.validated_combination import fit_validated
+        assert hashlib.sha256(frozen[entry["source_path"]]).hexdigest() == entry["source_sha256"], "Origin source changed"
+    _, (old, contextual, validated) = reference(product)
+    fit_context_memory, fit_validated = contextual.fit_context_memory, validated.fit_validated
 
     artifact = product / "data/derived/fresh-reevaluation.json"
     rows = []

@@ -48,3 +48,13 @@ The source origin and exact input hashes are recorded in
 is MIT licensed; its copyright and licence remain in this repository. Application
 cases, generator seeds, source CSVs, artifact schemas, pipeline stages and web assets
 are outside this library. See [the extraction boundary](docs/boundary.md).
+
+Numerical unit handling in 0.1.2 keeps dimensional scales derived from the
+observations. A constant prefix has no nonzero loss scale and therefore supplies
+no contextual or temporal-validation training example. With no eligible examples,
+the forecast combination uses equal expert weights. This is a declared fallback,
+not evidence that the combination learned from a constant history. Exactly
+constant observations have one PELT regime; non-l2 PELT costs require a caller-supplied
+penalty in the cost's units. Cross-correlation requires both series to vary and
+normalizes their units independently before multiplication. Forecast result
+objects retain the computed floating-point paths without decimal rounding.

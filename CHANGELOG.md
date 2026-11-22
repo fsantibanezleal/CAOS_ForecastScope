@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.01.002 - 2026-11-22
+
+- Remove absolute measured-unit floors from contextual features and normalized losses. Constant prefixes supply no normalized-loss training example; combinations use equal experts when no admissible history remains.
+- Preserve full precision when constructing forecast result paths.
+- Compute decomposition strengths with explicit zero-variance behavior and permit exactly zero remainder variance.
+- Keep the default PELT penalty in squared observable units for the l2 cost; other costs require explicit penalties. Exactly constant observations produce one regime.
+- Normalize cross-correlation observables independently before products, retaining independent unit invariance across very small and very large scales; reject an undefined constant-series correlation.
+- Add independent dimensional controls and retain existing study boundaries; this release claims numerical correctness rather than a new accuracy improvement.
+
 ## 0.01.001 - 2026-11-11
 
 - Return GARCH conditional volatility in source units after internal rescaling.
