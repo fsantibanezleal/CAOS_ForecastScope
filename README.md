@@ -63,3 +63,8 @@ Version 0.1.3 also assigns zero seasonal and trend strengths to exactly constant
 observations, including decimal levels for which floating-point variance may be
 nonzero. The same policy applies to public seasonal strength, STL and MSTL results.
 See [the verified publication receipt](docs/publication-0.1.3.json).
+
+The nonlinear diagnostic report uses a descriptive threshold flag, not proof of
+chaos. Version 0.1.4 restores its exact threshold description without changing the
+seeded numerical calculations. See the [eleven-family diagnostic migration audit](docs/diagnostic-migration-0.1.4.md)
+and [verified public release](docs/publication-0.1.4.json).
