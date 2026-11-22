@@ -1,0 +1,18 @@
+{
+  "state": "final-built-wheel-pass-official-public-wheel-pending",
+  "wheel_sha256": "34db7ac37f91ad82ff987712dfbc1e50137872949bd8e26cfd19896c3e312082",
+  "wheel_bytes": 61927,
+  "source_module_count": 19,
+  "source_seal_sha256": "6256734ca31c6349dbc20d35544ea40ca2e22a24349f8c540abd15f3abb9b837",
+  "controls_sha256": {
+    "C7-provider15-grouped-builtwheel-green.json": "c9cdd3be0291aaff9a77947dc534bc9fe4810652e654822c5eaee6c087f53e8e",
+    "C8-provider15-grouped-builtwheel-green.json": "96e63aba7c54f8ba26dddb6194e11f95b4300e88f8c04c2fcfea38324b06fd25",
+    "C9-C10-C14-provider15-builtwheel-controls.json": "53526657a3e58e38ff4c112a0d120a4ac5e305267660470dd149bb4562463d4b",
+    "four-family-provider15-builtwheel-controls.json": "9d53b7646758b090afc58e3e8a52ef63d4b64448990285fb83cb2c01aa60fa65",
+    "nonlinear-seasonality-provider15-builtwheel-controls.json": "00141d837c4553e919fd7fcf7fe4183cb2fd44178bc503e410ceb723208a1f47"
+  },
+  "compared_numeric_fields": 7363,
+  "maximum_numeric_difference": 0.0,
+  "module_source_changes_since_source_seal": false,
+  "remaining": "officialdistribution identity/install+productintegration+annotationbaseline+notebooks/report/browserreleasegates"
+}

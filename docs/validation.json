@@ -1,5 +1,5 @@
 {
-  "state": "complete final source+built-wheel author validation and independent grouped source acceptance passed; independent built-wheel and remote release gates pending",
+  "state": "final source+built-wheel author and independent grouped acceptance passed; remote release and official wheel gates pending",
   "version": "0.1.5",
   "checks": [
     {
@@ -42,6 +42,16 @@
       "targeted_tests": 58,
       "receipt": "docs/backend-units-0.1.5/independent-source-seal.json",
       "sha256": "6256734ca31c6349dbc20d35544ea40ca2e22a24349f8c540abd15f3abb9b837"
+    },
+    {
+      "check": "independent final grouped built-wheel acceptance",
+      "state": "pass",
+      "verified_modules": 19,
+      "protocols": 5,
+      "numeric_fields_matching_source": 7363,
+      "maximum_numeric_difference": 0,
+      "receipt": "docs/backend-units-0.1.5/independent-built-wheel-seal.json",
+      "sha256": "98a9dcbdfc31bb175d077788f21490f87538f400b8742a78cd13a26c95377a88"
     }
   ],
   "source_sha256": {
@@ -83,7 +93,6 @@
   },
   "scope": "Numerical diagnostic boundaries and explicit unavailable policies. Forecasting algorithms and retained published studies unchanged. Undefined-input distribution fields now null where no inferential verdict is defined.",
   "release_blockers": [
-    "Independent final grouped built-wheel acceptance",
     "Feature/develop/main remote CI and promotions",
     "Zenodo GitHub integration ready before actual newest GitHub release",
     "Trusted PyPI publication and independent official wheel controls"
