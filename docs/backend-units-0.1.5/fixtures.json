@@ -1,6 +1,6 @@
 {
   "fixture_source": "tests/test_diagnostic_boundaries.py",
-  "fixture_source_sha256": "d89eea0c37ab6fba339a20a54087e790e891efd48c4606876791769698fb03c1",
+  "fixture_source_sha256": "a5a56de97cf12c0852eba94bb8d02e4299a93e8d6d9ac313e0aee8fbb32d3696",
   "definitions": {
     "relationships": "relationship_fixtures; rng124 cause320,effect.9*lag2+.7noise; rng812 cumsum240,linked2*walk+.2noise",
     "cost_regimes": "changepoint_fixtures; rng814 normal240 with variance break120; rng328 levels0/4 repeated60 plus1.5noise",

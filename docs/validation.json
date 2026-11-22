@@ -64,14 +64,14 @@
     "src/forecastscope/diagnostics/volatility.py": "250b504310fc780286dbbba70291d9b0261b3276069195a0b6631145308ad06d",
     "src/forecastscope/forecasting.py": "3e92b93de74d4c44ca9956cab4f5cbb5e0b6d3781a962d197086e722826ae123",
     "src/forecastscope/types.py": "223748654bfe59dc6579fb8b2e55f75856df244d9885149dc63ec0d7372e43cf",
-    "tests/test_diagnostic_boundaries.py": "d89eea0c37ab6fba339a20a54087e790e891efd48c4606876791769698fb03c1",
+    "tests/test_diagnostic_boundaries.py": "a5a56de97cf12c0852eba94bb8d02e4299a93e8d6d9ac313e0aee8fbb32d3696",
     "tests/test_observable_units.py": "0df06715270aa3b4b33ca72f674d4492459b39c049254ddbbd21f22114e0cf51"
   },
   "bounded_backend_receipts": {
     "docs/backend-units-0.1.5/built-wheel-identity.json": "1c49b47d9f4a735818f08f2dc3bd38762ee7866119a66096d1a21fddda573564",
     "docs/backend-units-0.1.5/C12-complexity-provider14-red-controls.json": "747197793724ef0e7d1e3e5d04f81fe2c3ad70f69fbbced6c467247c36b0e21c",
     "docs/backend-units-0.1.5/C9-C10-provider14-red-controls.json": "be12fdb9b23891c2349b2774f7b6a8bff40f24e64feae7a0bbf8d8c88472b5fd",
-    "docs/backend-units-0.1.5/fixtures.json": "ae749ce4912ff93c34e124278de09dbc7a6e35c46c29f95c0bbb71b78a124915",
+    "docs/backend-units-0.1.5/fixtures.json": "1725662ad6e3eeda51ae4adf71c2d469254dbaca5fa47e94d230fea02dfc29af",
     "docs/backend-units-0.1.5/four-family-provider14-unit-controls.json": "309490aa9c8227b0099764c94b135b8a405b7a102013e055589117167d1aabfe",
     "docs/backend-units-0.1.5/nonlinear-seasonality-provider14-controls.json": "b79392eec38c267d4760191d68a43e653a64f1ab5b3bd6b67508ff02a5a7b04a",
     "docs/backend-units-0.1.5/pair-cost-regime-provider14-red-controls.json": "3295a4e6f4e42ce21ebaa0f697757069f902d2d9cc133929171ccc7bf78a7fa2"
@@ -93,5 +93,10 @@
     "docs/validation-0.1.2.json",
     "docs/validation-0.1.3.json",
     "docs/validation-0.1.4.json"
-  ]
+  ],
+  "lint_runtime_compatibility": {
+    "0.15.18": "pass",
+    "0.16.10": "pass",
+    "change": "Explicit stronger consistent rule set; only new-test import ordering changed; numerical module identities retained"
+  }
 }

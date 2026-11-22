@@ -1,6 +1,6 @@
 """Cross-unit and exact-constant controls for real diagnostic backend boundaries."""
-from dataclasses import asdict
 import json
+from dataclasses import asdict
 
 import numpy as np
 import pytest
@@ -136,8 +136,11 @@ def test_exact_constants_have_raw_levels_but_no_fabricated_normalized_inference(
     pytest.importorskip("nolds")
     pytest.importorskip("stumpy")
     pytest.importorskip("PyEMD")
-    from forecastscope.diagnostics import autocorrelation as ac, distribution as d, fractal as f
-    from forecastscope.diagnostics import nonlinear as nl, stationarity as st
+    from forecastscope.diagnostics import autocorrelation as ac
+    from forecastscope.diagnostics import distribution as d
+    from forecastscope.diagnostics import fractal as f
+    from forecastscope.diagnostics import nonlinear as nl
+    from forecastscope.diagnostics import stationarity as st
     from forecastscope.diagnostics.filters import emd
     from forecastscope.diagnostics.sequence import matrix_profile
     from forecastscope.diagnostics.volatility import arch_lm
