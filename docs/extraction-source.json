@@ -134,15 +134,18 @@
     "diagnostics/seasonality.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/seasonality.py",
       "source_sha256": "99c328fdb6b792b73485928146313e613f9c3ba354b1760e82e8bdd7e50b7cbb",
-      "extracted_sha256": "170f73cdfc98ca4e840fb7930eec7d771b9ec354f2e29e3c8cd034d591c2c76a",
+      "extracted_sha256": "99cb97f3d1d9d06e813e9f14556470cb9df7ca207068702f6ef38c4e9b9b8c67",
       "initial_extracted_sha256": "99c328fdb6b792b73485928146313e613f9c3ba354b1760e82e8bdd7e50b7cbb",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
       "current_ast_changes": [
         "_strengths",
-        "seasonality_report"
+        "mstl_decompose",
+        "seasonal_strength",
+        "seasonality_report",
+        "stl_decompose"
       ],
-      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
+      "current_change": "Published source-unit corrections followed by the 0.1.3 explicit zero-range decomposition policy. Constant inputs and components keep zero strength despite floating-point fitting noise. Original source identity remains unchanged."
     },
     "diagnostics/sequence.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/sequence.py",
