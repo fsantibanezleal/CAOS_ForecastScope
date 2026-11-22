@@ -1,0 +1,28 @@
+{
+  "fixture_source": "tests/test_diagnostic_boundaries.py",
+  "fixture_source_sha256": "d89eea0c37ab6fba339a20a54087e790e891efd48c4606876791769698fb03c1",
+  "definitions": {
+    "relationships": "relationship_fixtures; rng124 cause320,effect.9*lag2+.7noise; rng812 cumsum240,linked2*walk+.2noise",
+    "cost_regimes": "changepoint_fixtures; rng814 normal240 with variance break120; rng328 levels0/4 repeated60 plus1.5noise",
+    "emd": "emd_fixture; sin2pi*t/16+.3sin2pi*t/51+.01t for256",
+    "arch": "arch_fixture; rng981 normal512 times alternating32point scales1/5",
+    "rbf": "100zeros+20ones; PELTpenalty3/BinSeg1break"
+  },
+  "input_float64_little_endian_sha256": {
+    "cause": "d30f944e96b4d5e3eaff1c4c20986073ba7e84a51c84b45174b5e4aebd4665c8",
+    "effect": "c464bd4b27b4c6ad626deac547d1b14df5370be0b16a6462e7e0ec98849adb60",
+    "walk": "10366096f3ddbdfaf02b387a4b810201fd1f70c4a9848f02ecbf7bec87cdd663",
+    "linked": "c7b3a8ee29e017480407c49175640261a8305c6d6bd46dcd2eabc5bda5949f12",
+    "variance_change": "e0bcc132380d824c5f02803af5b069574f4d21fc8a82c8ee64cac6ed399e9b82",
+    "regimes": "d785e14a283018a21176ca1050466e1dded39651e03942183c43ec12ff9c1e3f",
+    "emd": "c9168ee5728a5d3cdced1e21c8fe2196f4ff51298489eb994b16ef35684ef34a",
+    "arch": "616603c0281a254d945ea928389aa37172e100d42513f9254e3bc3dc5c01f5fe",
+    "rbf_ties": "43313a1d1ebf21e3dac6a94b4095a625d1726d7546cfd4f60b9b1f5a400531cc"
+  },
+  "unit_grid": [
+    1e-09,
+    1.0,
+    1000000000.0
+  ],
+  "scope": "Generated numerical regression controls; not a forecast accuracy experiment"
+}

@@ -1,0 +1,372 @@
+{
+  "state": "independent-observations",
+  "version": "0.1.4",
+  "sources": {
+    "D:\\_Venvs\\chronoscope\\.venv-product\\Lib\\site-packages\\forecastscope\\diagnostics\\nonlinear.py": "43c18162dcec215c4806a66d2e0359c8387e51afbada70becdfa180500e07f4e",
+    "D:\\_Venvs\\chronoscope\\.venv-product\\Lib\\site-packages\\forecastscope\\diagnostics\\seasonality.py": "99cb97f3d1d9d06e813e9f14556470cb9df7ca207068702f6ef38c4e9b9b8c67"
+  },
+  "nonlinear_constants": [
+    {
+      "level": 0.0,
+      "K": {
+        "result": null
+      },
+      "chaos": {
+        "error": "AssertionError",
+        "message": ""
+      },
+      "report": {
+        "error": "AssertionError",
+        "message": ""
+      },
+      "rqa": {
+        "result": {
+          "recurrence_rate": 0.0,
+          "determinism": 0.0,
+          "laminarity": 0.0,
+          "l_max": 0,
+          "threshold": 0.0,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        }
+      },
+      "embedding": {
+        "result": {
+          "shape": [
+            126,
+            3
+          ],
+          "all_original_level": true
+        }
+      },
+      "surrogate": {
+        "result": {
+          "all_original_level": true
+        }
+      }
+    },
+    {
+      "level": 0.1,
+      "K": {
+        "result": -0.12367733371764818
+      },
+      "chaos": {
+        "result": {
+          "corr_dim": -8.618590176853127e-19,
+          "lyap_r": null,
+          "emb_dim": 4,
+          "lag": 1,
+          "likely_chaotic": false,
+          "reference": "Grassberger & Procaccia 1983, DOI 10.1016/0167-2789(83)90298-1; Rosenstein et al. 1993, DOI 10.1016/0167-2789(93)90009-P"
+        }
+      },
+      "report": {
+        "result": {
+          "n": 128,
+          "seed": 0,
+          "fit": "RANSAC with explicit random_state; OLS on no consensus",
+          "correlation_dimension": -8.618590176853127e-19,
+          "largest_lyapunov": null,
+          "zero_one_K": -0.12367733371764818,
+          "rqa": {
+            "recurrence_rate": 0.0,
+            "determinism": 0.0,
+            "laminarity": 0.0,
+            "l_max": 0,
+            "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+          },
+          "surrogate_test": {
+            "n_surrogates": 1,
+            "nonlinear_detected": false,
+            "reference": "Schreiber & Schmitz 1996, DOI 10.1103/PhysRevLett.77.635 (IAAFT); Theiler et al. 1992, DOI 10.1016/0167-2789(92)90102-S"
+          },
+          "likely_chaotic": false,
+          "verdict_note": "Descriptive flag requires Lyapunov > 0.01, 0-1 K > 0.5, and the surrogate flag",
+          "reference": "Grassberger & Procaccia 1983, DOI 10.1016/0167-2789(83)90298-1; Rosenstein et al. 1993, DOI 10.1016/0167-2789(93)90009-P"
+        }
+      },
+      "rqa": {
+        "result": {
+          "recurrence_rate": 0.0,
+          "determinism": 0.0,
+          "laminarity": 0.0,
+          "l_max": 0,
+          "threshold": 0.0,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        }
+      },
+      "embedding": {
+        "result": {
+          "shape": [
+            126,
+            3
+          ],
+          "all_original_level": true
+        }
+      },
+      "surrogate": {
+        "result": {
+          "all_original_level": true
+        }
+      }
+    },
+    {
+      "level": 1e-14,
+      "K": {
+        "result": null
+      },
+      "chaos": {
+        "error": "AssertionError",
+        "message": ""
+      },
+      "report": {
+        "error": "AssertionError",
+        "message": ""
+      },
+      "rqa": {
+        "result": {
+          "recurrence_rate": 0.0,
+          "determinism": 0.0,
+          "laminarity": 0.0,
+          "l_max": 0,
+          "threshold": 0.0,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        }
+      },
+      "embedding": {
+        "result": {
+          "shape": [
+            126,
+            3
+          ],
+          "all_original_level": true
+        }
+      },
+      "surrogate": {
+        "result": {
+          "all_original_level": true
+        }
+      }
+    },
+    {
+      "level": 1000000000000.0,
+      "K": {
+        "result": null
+      },
+      "chaos": {
+        "error": "AssertionError",
+        "message": ""
+      },
+      "report": {
+        "error": "AssertionError",
+        "message": ""
+      },
+      "rqa": {
+        "result": {
+          "recurrence_rate": 0.0,
+          "determinism": 0.0,
+          "laminarity": 0.0,
+          "l_max": 0,
+          "threshold": 0.0,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        }
+      },
+      "embedding": {
+        "result": {
+          "shape": [
+            126,
+            3
+          ],
+          "all_original_level": true
+        }
+      },
+      "surrogate": {
+        "result": {
+          "all_original_level": true
+        }
+      }
+    }
+  ],
+  "nonlinear_genuine": [
+    {
+      "unit": 1e-09,
+      "report": {
+        "n": 128,
+        "seed": 0,
+        "fit": "RANSAC with explicit random_state; OLS on no consensus",
+        "correlation_dimension": 0.5387355167867534,
+        "largest_lyapunov": -0.007922540241194211,
+        "zero_one_K": 0.23597765533848136,
+        "rqa": {
+          "recurrence_rate": 0.09277419354838709,
+          "determinism": 0.9207232267037552,
+          "laminarity": 0.7037552155771906,
+          "l_max": 57,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        },
+        "surrogate_test": {
+          "n_surrogates": 19,
+          "nonlinear_detected": false,
+          "reference": "Schreiber & Schmitz 1996, DOI 10.1103/PhysRevLett.77.635 (IAAFT); Theiler et al. 1992, DOI 10.1016/0167-2789(92)90102-S"
+        },
+        "likely_chaotic": false,
+        "verdict_note": "Descriptive flag requires Lyapunov > 0.01, 0-1 K > 0.5, and the surrogate flag",
+        "reference": "Grassberger & Procaccia 1983, DOI 10.1016/0167-2789(83)90298-1; Rosenstein et al. 1993, DOI 10.1016/0167-2789(93)90009-P"
+      },
+      "threshold_normalized": 0.4363610858542873
+    },
+    {
+      "unit": 1.0,
+      "report": {
+        "n": 128,
+        "seed": 0,
+        "fit": "RANSAC with explicit random_state; OLS on no consensus",
+        "correlation_dimension": 0.5387355167867484,
+        "largest_lyapunov": -0.007922540241193187,
+        "zero_one_K": 0.23597765533848125,
+        "rqa": {
+          "recurrence_rate": 0.09277419354838709,
+          "determinism": 0.9207232267037552,
+          "laminarity": 0.7037552155771906,
+          "l_max": 57,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        },
+        "surrogate_test": {
+          "n_surrogates": 19,
+          "nonlinear_detected": false,
+          "reference": "Schreiber & Schmitz 1996, DOI 10.1103/PhysRevLett.77.635 (IAAFT); Theiler et al. 1992, DOI 10.1016/0167-2789(92)90102-S"
+        },
+        "likely_chaotic": false,
+        "verdict_note": "Descriptive flag requires Lyapunov > 0.01, 0-1 K > 0.5, and the surrogate flag",
+        "reference": "Grassberger & Procaccia 1983, DOI 10.1016/0167-2789(83)90298-1; Rosenstein et al. 1993, DOI 10.1016/0167-2789(93)90009-P"
+      },
+      "threshold_normalized": 0.4363610858542873
+    },
+    {
+      "unit": 1000000000.0,
+      "report": {
+        "n": 128,
+        "seed": 0,
+        "fit": "RANSAC with explicit random_state; OLS on no consensus",
+        "correlation_dimension": 0.5387355167867425,
+        "largest_lyapunov": -0.007922540241191729,
+        "zero_one_K": 0.2359776553384812,
+        "rqa": {
+          "recurrence_rate": 0.09277419354838709,
+          "determinism": 0.9207232267037552,
+          "laminarity": 0.7037552155771906,
+          "l_max": 57,
+          "reference": "Eckmann, Kamphorst & Ruelle 1987, DOI 10.1209/0295-5075/4/9/004; Marwan et al. 2007, DOI 10.1016/j.physrep.2006.11.001"
+        },
+        "surrogate_test": {
+          "n_surrogates": 19,
+          "nonlinear_detected": false,
+          "reference": "Schreiber & Schmitz 1996, DOI 10.1103/PhysRevLett.77.635 (IAAFT); Theiler et al. 1992, DOI 10.1016/0167-2789(92)90102-S"
+        },
+        "likely_chaotic": false,
+        "verdict_note": "Descriptive flag requires Lyapunov > 0.01, 0-1 K > 0.5, and the surrogate flag",
+        "reference": "Grassberger & Procaccia 1983, DOI 10.1016/0167-2789(83)90298-1; Rosenstein et al. 1993, DOI 10.1016/0167-2789(93)90009-P"
+      },
+      "threshold_normalized": 0.4363610858542874
+    }
+  ],
+  "seasonality_genuine": [
+    {
+      "unit": 1e-09,
+      "strength": 0.9663238866298386,
+      "spectral_period": 12.0,
+      "spectral_power": 72.26374944197408,
+      "welch_period": 12.0,
+      "welch_power": 53.528925666559836,
+      "stl": [
+        0.898201721612295,
+        0.9663238866298386
+      ],
+      "mstl": [
+        0.9078103492092384,
+        0.9702483229002619
+      ]
+    },
+    {
+      "unit": 1.0,
+      "strength": 0.9663238866298385,
+      "spectral_period": 12.0,
+      "spectral_power": 72.2637494419741,
+      "welch_period": 12.0,
+      "welch_power": 53.52892566655984,
+      "stl": [
+        0.8982017216122946,
+        0.9663238866298385
+      ],
+      "mstl": [
+        0.9078103492092384,
+        0.970248322900262
+      ]
+    },
+    {
+      "unit": 1000000000.0,
+      "strength": 0.9663238866298388,
+      "spectral_period": 12.0,
+      "spectral_power": 72.26374944197408,
+      "welch_period": 12.0,
+      "welch_power": 53.528925666559836,
+      "stl": [
+        0.8982017216122955,
+        0.9663238866298388
+      ],
+      "mstl": [
+        0.9078103492092384,
+        0.970248322900262
+      ]
+    }
+  ],
+  "seasonality_constants": [
+    {
+      "level": 0.0,
+      "strength": 0.0,
+      "stl": [
+        0.0,
+        0.0
+      ],
+      "mstl": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "level": 0.1,
+      "strength": 0.0,
+      "stl": [
+        0.0,
+        0.0
+      ],
+      "mstl": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "level": 1e-14,
+      "strength": 0.0,
+      "stl": [
+        0.0,
+        0.0
+      ],
+      "mstl": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "level": 1000000000000.0,
+      "strength": 0.0,
+      "stl": [
+        0.0,
+        0.0
+      ],
+      "mstl": [
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

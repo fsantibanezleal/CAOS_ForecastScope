@@ -38,6 +38,13 @@ def _clean_pair(x, y) -> tuple[np.ndarray, np.ndarray]:
     return a[mask], b[mask]
 
 
+def _unit_pair(a, b) -> tuple[np.ndarray, np.ndarray]:
+    """Independent positive scales preserve regression levels and null hypotheses."""
+    if len(a) < 2 or np.ptp(a) == 0 or np.ptp(b) == 0:
+        raise ValueError("Relationship tests require two varying finite series")
+    return a / np.max(np.abs(a)), b / np.max(np.abs(b))
+
+
 @dataclass(frozen=True)
 class CrossCorrelation:
     """CCF of x vs y across signed lags, with the lag of peak absolute correlation (the lead/lag)."""
@@ -106,10 +113,11 @@ def granger_causality(cause, effect, max_lag: int = 6, alpha: float = 0.05) -> G
     from statsmodels.tsa.stattools import grangercausalitytests
 
     a, b = _clean_pair(cause, effect)
+    a, b = _unit_pair(a, b)
     # statsmodels tests whether the SECOND column Granger-causes the FIRST -> stack [effect, cause]
     data = np.column_stack([b, a])
     res = grangercausalitytests(data, maxlag=max_lag)
-    pvals = {lag: float(res[lag][0]["ssr_ftest"][1]) for lag in res}
+    pvals = {int(lag): float(res[lag][0]["ssr_ftest"][1]) for lag in res}
     best_lag = min(pvals, key=pvals.get)
     return GrangerResult(
         direction="cause -> effect", best_lag=int(best_lag), pvalues=pvals,
@@ -135,11 +143,11 @@ class CointegrationResult:
 
 def _is_i1(a: np.ndarray, alpha: float) -> bool:
     """A series is I(1) if ADF does NOT reject a unit root on levels but DOES on first differences."""
-    from statsmodels.tsa.stattools import adfuller
+    from .stationarity import adf
 
     try:
-        p_level = adfuller(a, autolag="AIC")[1]
-        p_diff = adfuller(np.diff(a), autolag="AIC")[1]
+        p_level = adf(a).pvalue
+        p_diff = adf(np.diff(a)).pvalue
         return bool(p_level >= alpha and p_diff < alpha)
     except Exception:  # noqa: BLE001
         return False
@@ -151,6 +159,7 @@ def cointegration(x, y, alpha: float = 0.05) -> CointegrationResult:
     from statsmodels.tsa.vector_ar.vecm import coint_johansen
 
     a, b = _clean_pair(x, y)
+    a, b = _unit_pair(a, b)
     eg_stat, eg_p, _crit = coint(a, b)
     j = coint_johansen(np.column_stack([a, b]), det_order=0, k_ar_diff=1)
     trace0 = float(j.trace_stat[0])

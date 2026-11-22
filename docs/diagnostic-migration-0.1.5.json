@@ -1,7 +1,7 @@
 {
   "state": "pass",
   "archive_sha256": "4c53b62e8aff184818adcd07f345be9d4587de99b40d7743aad5554e9ad21413",
-  "checker_sha256": "552ac6eb20d1611cfed7b9caf427fadb5cb7a4f09c10df5deb5f84189287e9e5",
+  "checker_sha256": "d42dc9a6a87ec66c9aa5a588ff622bef41e88616cf7a9dad5ad0b6907e39437a",
   "candidate_version": "0.1.5",
   "modules_audited": 11,
   "independent_comparisons": 19,
@@ -10,8 +10,14 @@
   "audit": {
     "autocorrelation": {
       "archive_sha256": "a05b538d3d89d4a11081ab35e9ff01430157571063a5dae9af65d7127e110552",
-      "public_sha256": "a05b538d3d89d4a11081ab35e9ff01430157571063a5dae9af65d7127e110552",
-      "changed_procedures": [],
+      "public_sha256": "6b2109a70adfd2db4881a3673592de95fcfcd33018a3fe4a7419b04b8c1003bd",
+      "changed_procedures": [
+        "_varying",
+        "acf",
+        "box_pierce",
+        "ljung_box",
+        "pacf"
+      ],
       "archive_procedures": {
         "Correlogram": "e01596777c59c61cbff32f2f9d331069c6c0e154ee2415e3a5957da9f1c19f6b",
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
@@ -29,12 +35,13 @@
       "public_procedures": {
         "Correlogram": "e01596777c59c61cbff32f2f9d331069c6c0e154ee2415e3a5957da9f1c19f6b",
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
+        "_varying": "a077e870cf19f3ae427fe412787ab7efe267d4271873a0e0ec800936edcc5865",
         "bartlett_band": "4f691d8c7880b262ca8ebfba6f5bdc2e432a83b781f9d11bc31ceaf6c5f82dc9",
-        "acf": "d0e521ee42bf80247f581e7cc2defceffab2e84b4ded2d3230e414a7abc0990b",
-        "pacf": "d26afdfc1834e8eecc9f728b5886b36da127de1959cbf58295c82cee1491baea",
+        "acf": "8232d11ca5d8483c265fea8f51216e7490982dd3374b086e4af1d63c5864b67c",
+        "pacf": "3af5e5359bd855796e5a01499f949e25cc4730c0dfffdd502a1e37361a54693b",
         "PortmanteauTest": "1ee8d0a43ad2725080ad21339b6faec6a62b7b7443277df816698a3f5d0be4d4",
-        "ljung_box": "94b9074f7ada2818aae81e81b780b681c0384ce4b641b1a7be022649de59a910",
-        "box_pierce": "859cabb1c2ef75966f8ecc1af756cdf0fa9f10b38bd569c822113d5bed7d7e7c",
+        "ljung_box": "cfdf64792ee746d1ce7123c70853d0e6cb45f99be5a26f25560e5c412daf8017",
+        "box_pierce": "4c824df1897c28cf3c150f383c6cda76063a38002ca4532de962eaadf2604d89",
         "durbin_watson": "1a5afd4888e4659b039db263ac697fedaee0ab781129ec85bc6f290c4c1fe12a",
         "lag_plot_pairs": "5c20a5243b3a824b4e6200766b60b32b333457884075c10d576069fb8c09d78f",
         "autocorrelation_report": "1b1b7c731fc611a529953ce6c2f0139adc6ff51a295e6ec69120a169ea50886b",
@@ -43,10 +50,14 @@
     },
     "causality": {
       "archive_sha256": "e9b8fe8bc9b64a5cadf0e7accc2fae0b322fa1511958c375828f8ffede840c01",
-      "public_sha256": "958d4e55f1d4297c80434091e534e9652a2dc5ddab4116ab876fb8dfef01b457",
+      "public_sha256": "98db620e9ce9ac0aa1265b48dabe8163d4b28a51ef1c83ac3c72b9b744c47895",
       "changed_procedures": [
+        "_is_i1",
+        "_unit_pair",
         "causality_report",
-        "cross_correlation"
+        "cointegration",
+        "cross_correlation",
+        "granger_causality"
       ],
       "archive_procedures": {
         "_clean_pair": "a9a33eb1814b89ae2a7e32c332132fc16248cc29091943f1b835bd3a31ace02c",
@@ -61,22 +72,26 @@
       },
       "public_procedures": {
         "_clean_pair": "a9a33eb1814b89ae2a7e32c332132fc16248cc29091943f1b835bd3a31ace02c",
+        "_unit_pair": "28b379e26fdcc5d52d165a24e58a4bed99f2cb8a5b1fe50ce7891a6d4a335af8",
         "CrossCorrelation": "f60a96e9a7389f965979813e261e4105000f1c776697435fede02e0b65f769cb",
         "cross_correlation": "bdb3c744bef832ce5e3335db07c184ec702098a22e0f97cdc1c9cc3c11593478",
         "GrangerResult": "63b26b3d1fcac219309f5263d97d8468ea2c66c493dfdd1fa83c13430e311d5f",
-        "granger_causality": "6370edeb69776560887dacf2624af930ffd9df2bb0d750cdd0c09ed6de759e38",
+        "granger_causality": "5191b9511a6dd95529f37fc1632b95912ed0a82a9f9243db7281784ecb5b98ac",
         "CointegrationResult": "27eb7b83416feaa3c05d469ceddf3fb3fdf69ddb1848ef8cd67299a8518cd624",
-        "_is_i1": "cef7ce474785d4ccc489db444fa2776431b4d1b67972ee1952d6ffd58f3b7d07",
-        "cointegration": "99e30464c573602cc5ef2c76db997f3994727ce0902d3ca2e56b1b534a9c8e10",
+        "_is_i1": "a2b02d97077ebf0f456ed8ad0d8ea54980dcbfd410a2361349e6a2581228cf55",
+        "cointegration": "bfee2c314e1191150c28e18b65a3c34a0ad8d4a4a2c43cdcd27aafad88d229b3",
         "causality_report": "eb1468b923c06e041d318ffd9414fcef471622e7548a4290093251355e00fb48"
       }
     },
     "changepoints": {
       "archive_sha256": "dc0ce4fcb0eae8ca1b58bcf12046d09298d9807ce83e3d9344528a583b8e1466",
-      "public_sha256": "e5bb46ccc417ae4066e1f65a13bc18abadcfc31a9a0d578ffa227b97773cc7d7",
+      "public_sha256": "8185e6677800bb54c20a52bb15f0eb78be3dcdc63e98269903733d2d8bf1ae9a",
       "changed_procedures": [
+        "_cost_input",
         "_segments",
+        "binseg",
         "changepoints_report",
+        "markov_regimes",
         "pelt"
       ],
       "archive_procedures": {
@@ -94,22 +109,30 @@
       "public_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
         "ChangePoints": "e2d558aba9fd3dc3f34ce8c1fea584e1a3e5ea99ae05b9e92eacb57f099e2374",
-        "_segments": "75eef36782092c73c612b3a1a019ec5d463b2ba9b25026553b4ccc837097e4a4",
-        "pelt": "6613b9b81c1120cc8657c79e3c8c08ce5209d8e50034e4a7224bff5914b83aef",
-        "binseg": "2698ce89fac8e2fd023ff589819f929b44a943b440cdc0dfbb8314380de7e185",
+        "_segments": "0ea8a8067557a250eba7265115d15feaafae71585926d5db9d89f07d2a7c8a58",
+        "_cost_input": "fd601de29cffc7a3ec45944f62273ebd738c5016b798edd5f922be257f5536ff",
+        "pelt": "8812a19a7a1ea4054379b67df756284840c728c2698314ef52360a66ccb46a32",
+        "binseg": "99d651194c84973210eceebb3dd25da7ceef514179b7cae9eb3a04a45a0d3406",
         "CusumResult": "9acce3423dbe9c7b922519acec2b2895e1470fc545e1600d64e5aba82b9c2a04",
         "cusum_stability": "11c87f8a76dc2e9dde191eb39c6e22e81aaad6f6dbfe58afe4389991afcad435",
         "RegimeFit": "da98038179753c732b4ea500c40625f88688d054662a345004e4b10a9af2d3d4",
-        "markov_regimes": "9dd2036fcb961a4e35afc5cf0379484b427113462a26912919b2e6de66b6631a",
+        "markov_regimes": "0903dcad5abcce9e62b9117ae97c7c552583441b7fbaf997d8475c308c5c4572",
         "changepoints_report": "13da15c2089861d6293400ae1887c159eddb996ffa2e86a12c29b3813237b116"
       }
     },
     "distribution": {
       "archive_sha256": "36d79880747d2cef9c715e84e23586014988b77eadb78acac33edf6cf3d07f42",
-      "public_sha256": "39d3ce3d551727d44963bfdbcaae0723f6673639fe83a3267cdef75224b59889",
+      "public_sha256": "91b933359db44f7e4437c002827aa1a1a1b72600e0dadb4fdf3a45332f44f963",
       "changed_procedures": [
+        "ComplexitySummary",
+        "DistributionSummary",
+        "_finite",
+        "catch22_features",
         "complexity",
-        "distribution_report"
+        "distribution_report",
+        "kde_curve",
+        "qq_points",
+        "summary"
       ],
       "archive_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
@@ -124,20 +147,22 @@
       },
       "public_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
-        "DistributionSummary": "1c9fafecae700ad688cfde005b05f87b99d52a962a4b368d531512d1312f9dee",
-        "summary": "a2794d347d17591fb3cea42d5c29601f1da6c74e7e9e8fd8ce81578964943415",
-        "kde_curve": "e9c1ad3e9fa30d984e99cabe1da2a4dc660a6ee76000049556b29df83cfbdc19",
-        "qq_points": "a4169b13f27d82d5bbdf933846596ed5db33be1c68d233ac787d10b59d59b7c0",
-        "ComplexitySummary": "5497dd8221feb55753fcffcb981a5d01b1358169e97b6f728a6ead0e7586ddfd",
-        "complexity": "1a7be8ac8f2f7de1c537ad955b2984bccf546ce82dac97c8e009e2c11bac673f",
-        "catch22_features": "77128895bee8c74f8a2b261f3dec1de9e2a777cff7168ae3805428db72ab1ae4",
-        "distribution_report": "85339f584997114991c7fae79053abeaebff4cced26facb4488212bcaf988aae"
+        "_finite": "532688435943f22a734220234ac7c4f5d600a49d9921e9e76f8e9fa04d665919",
+        "DistributionSummary": "1828ea03eb87823091f2873e55c21129cba70072aa001d110deba3a8cff43f9a",
+        "summary": "91c368436da363159aa6b2dd76de08546fd3e62fab38d3ea0e8d8aec252b0884",
+        "kde_curve": "607829ae56a60af93afd433827ad1695aeada2269377c802566d5f9a5bea743d",
+        "qq_points": "dc037e2477383ccf16a5381bc115a151f6e22b2854d63a8817926ab5f2ba2fca",
+        "ComplexitySummary": "250c795560f575e5784237340c80ad84b49702299940b882df8579fd9217c450",
+        "complexity": "5973849e7e10b605a751259d4d5a2c9d947021fa2f86abbd3b8b27e8822fc7fd",
+        "catch22_features": "f7722e81c42648db530a79086c1ac1d70669679e9dcc891de8144a05ea1835df",
+        "distribution_report": "4021ffd2dd01104dadf097a7412222f80ca1213b368a000995058e37d3a8be65"
       }
     },
     "filters": {
       "archive_sha256": "227301d30878b6379d9588e8baa204a03a1d8d8dd4a329f90df8ac65db87741f",
-      "public_sha256": "12a85b23ab530c1d20a960dc2d97d109d2fc3fda67a82777c56cc3a446487bcc",
+      "public_sha256": "52964f974a068fed308d93bbc0aa2bfb7974efecbc991f91d80f05243c6bab4a",
       "changed_procedures": [
+        "emd",
         "filters_report"
       ],
       "archive_procedures": {
@@ -160,7 +185,7 @@
         "baxter_king": "02f275af78b6f8558301a2d9404d8e11cb37cac8977f641be3f3b57512ddb2b8",
         "christiano_fitzgerald": "7db91bc7b13103f1bbe58706ac70971b2de4e22076ebc45884efcc4140544557",
         "EMDResult": "65b1a6203e81bd3e856a7e25027aecc7e36f398d61dd3462ed4182e14e7e6e77",
-        "emd": "f9bc621a39ecef3791e6267f105f41586fa31f1e0068dace7bb3c816b6b90aa6",
+        "emd": "5d541b0781872e999704270273add7614df4accfad402be1f998ee5f2f6156e7",
         "ceemdan": "fc15c76ca9297897ca133f358163d7689ee1e77d1872b5cb90458e1a38ecb18a",
         "Scalogram": "440ac27ca740f392e6296b20f8616a4519494168d2f8f079a3d87cf6e6343151",
         "cwt_scalogram": "2d6a2df7e3083b5f53a1aba02e45b58fb5a6eff1cc05b5f77c539144410ba9e1",
@@ -169,11 +194,14 @@
     },
     "fractal": {
       "archive_sha256": "f1fa42f4c0676a97cde5a07ca79e9a832ae356c13451a7d46ee3859c107f3b1e",
-      "public_sha256": "c4c9752da0abee7d29eec8dd28445b2ebc8d7db49a5264d6e2406019bc3087cc",
+      "public_sha256": "e8919bbccf9fabfb6d1670e08d48334a4f90d105869e068b1dc9df1a320a2555",
       "changed_procedures": [
+        "_varying",
         "dcca_coefficient",
+        "fractal_dimension",
         "fractal_report",
-        "hurst"
+        "hurst",
+        "mfdfa"
       ],
       "archive_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
@@ -189,22 +217,25 @@
       },
       "public_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
+        "_varying": "14cac4255b7a39164e4619d24cec863656bbe9fc8eb7a1db2f85b2775889d26b",
         "HurstResult": "1f34bc600acdbceee86c4c593e38005f6e81213c8d7923043750de61d7c71c7d",
         "_interpret_hurst": "fd3d2d21fccc113e6a853cf14847c3ef6f4fe79a13ee165a70f59bc47d62982e",
-        "hurst": "87f5d0fef43a2158c265c472ca052093701a25f3bff335725c05b2697b7eff80",
+        "hurst": "0fce47e129517e9f63c3db0179b8550424d931d4466f5344b6e92577af2325e2",
         "MultifractalSpectrum": "05673b3a6dba202849e56c6aa036122e08c9dae2db8127731c0e7055283f4273",
-        "mfdfa": "367c745618f4f6dfcbacf55fa4b50a437690837701f445236277ab1a19f7dd62",
+        "mfdfa": "c92927eb789af1eca0c8edeca7c925dd978023f4b2afd436655a4a5fe8ce1e73",
         "FractalDimension": "5a89e3d1f64b1f9591aba9747b45af04eb3dc8a3b1d05f9e95a876d61487ffeb",
-        "fractal_dimension": "8538ea6c45fd1d2443211e0b6d87abe296033b689a27399da2d4998cd824be68",
-        "dcca_coefficient": "e38056812c4994e1924ceb8d0d2df52419a8d876e8c2e605e07ed0d826549c16",
+        "fractal_dimension": "c0fc0c8404753e23b9b07abc87ad98a72dc9e2421212a85d3c4f2a684b4abf64",
+        "dcca_coefficient": "154d0e850ab0df57cc3571fa51fb69c4ddcbe622efc91e9fe1ec145283aad9ae",
         "fractal_report": "357263426bb368a388ba8d6115f32e1d332a3cf94e460f2b296c1ceeda6f539e"
       }
     },
     "nonlinear": {
       "archive_sha256": "96d6649f484514fd27704c10f5cea9ed390d85d6caffdbd8df530271fe1ac9ba",
-      "public_sha256": "43c18162dcec215c4806a66d2e0359c8387e51afbada70becdfa180500e07f4e",
+      "public_sha256": "8cf0fd024707ecfdbe17421b28bf40a931b9427ac71243816e2a1a2b91a275cb",
       "changed_procedures": [
-        "nonlinear_report"
+        "chaos_measures",
+        "nonlinear_report",
+        "zero_one_test"
       ],
       "archive_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
@@ -226,14 +257,14 @@
         "time_delay_embed": "465dc5b80a85951d5a3272d2017eb2a482f529ae110e347c75a7b2db4006e81e",
         "ChaosMeasures": "d6af57f01db2d005bd4776b9fbebf3bf22a0269d4ab78c8bf1f9c0841f9008f1",
         "_seeded_slope": "4c060d10fc1accedbec227af19f194ee171f1a27c803217422f334de38ce6508",
-        "chaos_measures": "573a8419817cf63b1fdfd7cb41699def974a948905b1f181e07d54dd7d311d27",
+        "chaos_measures": "3425a5bd2e52012f689c8eb252a8a2322ffaed1b00e71aafbee4e29a6921faad",
         "RQA": "445ffb3de98aee3f0e7e50e6e8fe35ad1993da0535d03bf84dc418ceb1a963b7",
         "recurrence_quantification": "7ca7ddfbf55628f022afdf885306ed2a3db404807319d64d6d2f3acf23298bcc",
         "_line_lengths_diagonal": "2dfc8e20c243e0f6a130ca05d8504e9fc034977c68064c2ebb3eb314fefd3aa8",
         "_line_lengths_vertical": "29db2ea82f3eb815f75a7253c072bcac3e8d19f8cb7c030d97bc9732252b6a60",
         "_runs": "9ee3af8f1e79374c86752dc9312faa8a7c7428109d8627c6549caf1640d41556",
         "iaaft_surrogate": "19c911e45533e7a3a9fed3840e2eac9e037e1a4ad4f5a90229b3ba6fe20b7ef9",
-        "zero_one_test": "e35d390fbfd4f78d69ef92242fdfa2782021b32b8287a4a0fdde847a44609a8f",
+        "zero_one_test": "61945b922f33dad1c12cc6284e527b015fada09915ac01c9fc4b7b2a15208426",
         "nonlinear_report": "8d2638e828fafd1dd0c384b7a2e3fe9cce45e818493ed92f4ddfa83799b02934"
       }
     },
@@ -280,7 +311,7 @@
     },
     "sequence": {
       "archive_sha256": "63cf6a21ba110d08fd5bde2c9e4df2ec53a75b29ab03fba151b83be35c7420b9",
-      "public_sha256": "a89bc7f5353fa892e99fc76383434bdc9d717d988a6942bc6c44fbe0a891c8da",
+      "public_sha256": "9a6779ea608e01cc908dd99c4a65298ab3766e1e500e04c9a306f5d07ed1c717",
       "changed_procedures": [
         "matrix_profile"
       ],
@@ -293,7 +324,7 @@
       },
       "public_procedures": {
         "finite_sequence": "843033256e495e8e84f0e06ce7836074aee21139e0e6294deaa50d1f1811649a",
-        "matrix_profile": "8dc141a072a10b1571aa82e0f4f37acffc76db33abca0a8227bfd788e6aa3b0e",
+        "matrix_profile": "25866031962c8c764510c51bc0af594907bae7047c69ec6a34040687b72f6298",
         "multiscale_entropy": "bb5d96345577eb4877056e56f659857bba54bf948274b6847292bd97c0255548",
         "time_reversal": "9889facc3544e4ac13ca7ddfdeb9907a93451fa4353637625f3ead1b000cf352",
         "sequence_report": "2aac72d7ed9c8d71f26b35c711611c2fbd5a89ea1c48c7685d545c1af0aede29"
@@ -301,7 +332,7 @@
     },
     "stationarity": {
       "archive_sha256": "42490c61430e82012d163318fbf231a0a21c50b4e53ca9d2e1c58a13bf257029",
-      "public_sha256": "0eeb921728653929c6694930e0544f166b5c62d60d78c8d754e68917923e8c58",
+      "public_sha256": "33da7c4c2b4f1426731a620becf5b1a2b6e9896dc98c8716298aed0ddce6090e",
       "changed_procedures": [
         "_unit_root_input",
         "adf",
@@ -329,7 +360,7 @@
       "public_procedures": {
         "TestResult": "138b32adaa7aa9a44dc4b52ccff52606a557ccb09b95cafaff7e0008b7db5fdb",
         "_clean": "b26e03438e225255ab6e7c87dbde90e9d548968d8df3326ac706417357cffd0c",
-        "_unit_root_input": "3e6da70e2265ed1650db56eda3037d41adf0f7aaa1efeb2c8c26646457061e35",
+        "_unit_root_input": "0563fdac07367d8aa366d7ad18d0de2ac18c71cd1c7a7ee3b793c02f2fd02918",
         "adf": "e9b0230a86636be72bafa8188f29aa3ad9c92513e2e8859dfef2828e193daa31",
         "kpss": "5f5d4a993b0bd94aa7a0fe898a0c67250939d9df1945519ede0c3f3715a03699",
         "phillips_perron": "84e20351cdb4478ee9a69b6801b2a9cd19ed57dcc5c6800bba60cf0da99a71e9",
@@ -344,7 +375,7 @@
     },
     "volatility": {
       "archive_sha256": "5131ec78380b3ef206702785ec44af7e4e43a190f46005aab22c77bdfe40b6af",
-      "public_sha256": "24a6f0f394970bed74c967ac898dcca44f0aa963509291b98fead415ad0564e7",
+      "public_sha256": "250b504310fc780286dbbba70291d9b0261b3276069195a0b6631145308ad06d",
       "changed_procedures": [
         "ArchTest",
         "BoxCoxResult",
@@ -361,6 +392,19 @@
       "public_procedures": {
         "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
         "ArchTest": "289d0420c36cd30e3ec69daf3a9a3baf678cee464c0c9288805f354c9a7f0c84",
+        "arch_lm": "daa9b7bf1aa5c067e2a338aa651430ce1bff0a8b9d6f24ab4b7a26a13ec414f9",
+        "GarchFit": "82ceb45039e753a25440ceb76798fbc8ba8dab1ea6f72a13e0266b954f7c9582",
+        "garch": "ccb7c858187d95c041f260c7514f59ed13049bfa6755f5061393317f3e26b5c1",
+        "BoxCoxResult": "e692908c3467b35337c7e4a261f01799f9e6e9f4edcbee47ec7e218a51067df0",
+        "_positive_shift": "277b2a579647ec3078faff5ff1bdadba23a0f4d71d9b7e04599908cae4b1bdfb",
+        "box_cox": "b9a65ee489f4009fd1e8600719f0deca284b4d5687d3f1f11b4db89f53066417",
+        "rolling_volatility": "6d87f7ca6e692d661efc5470298157fb514f909e7dd6f2707a05d142cfb38d66",
+        "volatility_report": "4d071016407604a185f850c49aaf86c9bd08f5cdbb861ced185a4f72290a4de2"
+      },
+      "original_public_0.1.1_sha256": "24a6f0f394970bed74c967ac898dcca44f0aa963509291b98fead415ad0564e7",
+      "original_public_0.1.1_procedures": {
+        "_clean": "8fd7c009d1bf405113722a7f3f1359a6cd9ccc2e169582d2a8db4cca2bfa2cb4",
+        "ArchTest": "289d0420c36cd30e3ec69daf3a9a3baf678cee464c0c9288805f354c9a7f0c84",
         "arch_lm": "5b5ced2ad5c574ac4ff0568c05c13a9c2a71c8248baddeb3b87cd96f865ab3eb",
         "GarchFit": "82ceb45039e753a25440ceb76798fbc8ba8dab1ea6f72a13e0266b954f7c9582",
         "garch": "ccb7c858187d95c041f260c7514f59ed13049bfa6755f5061393317f3e26b5c1",
@@ -370,7 +414,9 @@
         "rolling_volatility": "6d87f7ca6e692d661efc5470298157fb514f909e7dd6f2707a05d142cfb38d66",
         "volatility_report": "4d071016407604a185f850c49aaf86c9bd08f5cdbb861ced185a4f72290a4de2"
       },
-      "original_public_0.1.1_sha256": "24a6f0f394970bed74c967ac898dcca44f0aa963509291b98fead415ad0564e7"
+      "intentional_changed_procedures": [
+        "arch_lm"
+      ]
     }
   },
   "comparisons": [
@@ -384,6 +430,10 @@
       "keywords": {
         "nlags": 16,
         "lags_m": 10
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -395,6 +445,10 @@
       ],
       "keywords": {
         "period": 24
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -409,6 +463,10 @@
           12,
           24
         ]
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -423,6 +481,10 @@
           12,
           24
         ]
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -435,6 +497,11 @@
       ],
       "keywords": {
         "max_lag": 4
+      },
+      "reference_recipe": "verified archived relationship backends on independently positive-scaled inputs",
+      "raw_original_comparison": {
+        "sha256": "d8a3964b64fdb5e849d95d803ba221513db0b373f8e84750bbfa9f3f6740aa75",
+        "state": "also matches unconditioned original"
       }
     },
     {
@@ -444,7 +511,11 @@
       "input_sha256": [
         "cff723c80a41525aa5f6f2b13dabdf88fdd03f8e301eb87a9aef3ceceb2cf203"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "changepoints",
@@ -455,6 +526,10 @@
       ],
       "keywords": {
         "n_bkps": 2
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -464,7 +539,11 @@
       "input_sha256": [
         "a4579e4c1017f3c57d555f396f9a0c54f741840f38088e6e80b79c1d89acf367"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "distribution",
@@ -473,7 +552,11 @@
       "input_sha256": [
         "a4579e4c1017f3c57d555f396f9a0c54f741840f38088e6e80b79c1d89acf367"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "filters",
@@ -482,7 +565,11 @@
       "input_sha256": [
         "a4579e4c1017f3c57d555f396f9a0c54f741840f38088e6e80b79c1d89acf367"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "filters",
@@ -491,7 +578,11 @@
       "input_sha256": [
         "a4579e4c1017f3c57d555f396f9a0c54f741840f38088e6e80b79c1d89acf367"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "filters",
@@ -500,7 +591,11 @@
       "input_sha256": [
         "a4579e4c1017f3c57d555f396f9a0c54f741840f38088e6e80b79c1d89acf367"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "filters",
@@ -511,6 +606,11 @@
       ],
       "keywords": {
         "max_imfs": 3
+      },
+      "reference_recipe": "verified archived EMD on (x-x[0])/max(abs(x-x[0])); restore components and residual units",
+      "raw_original_comparison": {
+        "sha256": "2ec1d6d31f6589f5b65ff96a994c5bded1d35cffcce419cb66cadbd1dedc71a8",
+        "state": "also matches unconditioned original"
       }
     },
     {
@@ -520,7 +620,11 @@
       "input_sha256": [
         "a4579e4c1017f3c57d555f396f9a0c54f741840f38088e6e80b79c1d89acf367"
       ],
-      "keywords": {}
+      "keywords": {},
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
+      }
     },
     {
       "family": "fractal",
@@ -532,6 +636,10 @@
       ],
       "keywords": {
         "scale": 24
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -544,6 +652,10 @@
       "keywords": {
         "n_surrogates": 3,
         "seed": 17
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -555,6 +667,10 @@
       ],
       "keywords": {
         "window": 16
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -570,6 +686,10 @@
           2,
           4
         ]
+      },
+      "reference_recipe": "unchanged verified original inputs",
+      "raw_original_comparison": {
+        "state": "same verified reference"
       }
     },
     {
@@ -581,6 +701,11 @@
       ],
       "keywords": {
         "season_length": 24
+      },
+      "reference_recipe": "verified original public 0.1.1 report; only ARCH-LM backend receives max-absolute-scaled residuals",
+      "raw_original_comparison": {
+        "sha256": "945a006f09e9d6c0f5108be5c8c7d214b95c207b7744798bb1b99efdd086915e",
+        "state": "also matches unconditioned original"
       }
     }
   ],

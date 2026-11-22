@@ -95,16 +95,29 @@ class EMDResult:
 
 
 def emd(x, max_imfs: int = -1, seed: int = 0) -> EMDResult:
-    """Plain EMD sifting into IMFs (fastest first) + the residual trend (``get_imfs_and_residue``)."""
+    """EMD with dimensionless stopping rules and components restored to source units.
+
+    PyEMD's range/power stopping thresholds apply to original-prefix deviations
+    normalized by their observed amplitude. A constant has no oscillatory IMFs.
+    """
     from PyEMD import EMD as _EMD
 
     a = _clean(x)
     del seed  # plain EMD is deterministic (no noise); the seed applies to EEMD/CEEMDAN only
+    if not len(a):
+        raise ValueError("EMD requires finite observations")
+    offset = float(a[0])
+    centered = a - offset
+    scale = float(np.max(np.abs(centered)))
+    if scale == 0:
+        return EMDResult(name="EMD", imfs=np.empty((0, len(a))), residual=a.copy(),
+                         reference="Huang et al. 1998, Proc. R. Soc. A 454:903-995, DOI 10.1098/rspa.1998.0193")
     engine = _EMD()
-    engine.emd(a, max_imf=max_imfs)
+    engine.emd(centered / scale, max_imf=max_imfs)
     imfs, residue = engine.get_imfs_and_residue()
     return EMDResult(
-        name="EMD", imfs=np.asarray(imfs, dtype=float), residual=np.asarray(residue, dtype=float),
+        name="EMD", imfs=np.asarray(imfs, dtype=float) * scale,
+        residual=np.asarray(residue, dtype=float) * scale + offset,
         reference="Huang et al. 1998, Proc. R. Soc. A 454:903-995, DOI 10.1098/rspa.1998.0193",
     )
 

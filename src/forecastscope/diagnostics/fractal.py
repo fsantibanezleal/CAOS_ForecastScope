@@ -36,6 +36,13 @@ def _clean(x) -> np.ndarray:
     return a[np.isfinite(a)]
 
 
+def _varying(x) -> np.ndarray:
+    a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("Scaling estimators require varying finite observations")
+    return a
+
+
 @dataclass(frozen=True)
 class HurstResult:
     """Long-range dependence: the Hurst exponent by R/S and by DFA, with an interpretation."""
@@ -60,15 +67,19 @@ def hurst(x) -> HurstResult:
     import nolds
     from hurst import compute_Hc
 
-    a = _clean(x)
+    a = _varying(x)
     n = len(a)
     # R/S on the series levels (compute_Hc expects a positive-ish level series; use kind='change' for returns)
-    try:
-        h_rs, _c, _data = compute_Hc(a, kind="random_walk", simplified=True)
-    except Exception:  # noqa: BLE001 - fall back to nolds if compute_Hc rejects the input
-        h_rs = float(nolds.hurst_rs(a, fit="poly"))
-    # Explicit least-squares slopes avoid nolds' unseeded randomized default.
-    dfa_alpha = float(nolds.dfa(a, fit_exp="poly"))
+    # compute_Hc changes np.seterr and may raise before restoring it. Isolate
+    # backend state on success, fallback and failure without changing caller policy.
+    with np.errstate():
+        try:
+            with np.errstate():
+                h_rs, _c, _data = compute_Hc(a, kind="random_walk", simplified=True)
+        except Exception:  # noqa: BLE001 - fall back to nolds if compute_Hc rejects the input
+            h_rs = float(nolds.hurst_rs(a, fit="poly"))
+        # Explicit least-squares slopes avoid nolds' unseeded randomized default.
+        dfa_alpha = float(nolds.dfa(a, fit_exp="poly"))
     # DFA alpha maps to H: fGn regime alpha in [0,1] -> H=alpha; fBm regime alpha in [1,2] -> H=alpha-1
     h_from_dfa = dfa_alpha if dfa_alpha <= 1.0 else dfa_alpha - 1.0
     return HurstResult(
@@ -97,7 +108,7 @@ def mfdfa(x, q=None, order: int = 1) -> MultifractalSpectrum:
     """MF-DFA generalized Hurst h(q) and the Legendre singularity spectrum f(alpha) (Kantelhardt 2002)."""
     from MFDFA import MFDFA as _MFDFA
 
-    a = _clean(x)
+    a = _varying(x)
     n = len(a)
     if n < 200:
         raise ValueError("MF-DFA needs a longer series (>= ~200 points) for a stable spectrum")
@@ -135,7 +146,7 @@ def fractal_dimension(x, kmax: int = 10) -> FractalDimension:
     """Higuchi, Katz, and Petrosian fractal dimension of the series graph (antropy)."""
     import antropy as ant
 
-    a = _clean(x)
+    a = _varying(x)
     return FractalDimension(
         higuchi=float(ant.higuchi_fd(a, kmax=kmax)), katz=float(ant.katz_fd(a)),
         petrosian=float(ant.petrosian_fd(a)),
@@ -152,7 +163,7 @@ def dcca_coefficient(x, y, scale: int | None = None) -> dict:
     """
     a, b = _clean(x), _clean(y)
     m = min(len(a), len(b))
-    a, b = a[:m], b[:m]
+    a, b = _varying(a[:m]), _varying(b[:m])
     if scale is None:
         scale = max(8, m // 8)
     if scale >= m:

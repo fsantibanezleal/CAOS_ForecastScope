@@ -29,7 +29,7 @@ def matrix_profile(x, window: int = 32, regimes: int = 3) -> dict:
         raise ValueError("Matrix Profile requires an integer window >=3 and n >= 2*window+1")
     if not isinstance(regimes, int) or regimes < 2:
         raise ValueError("FLUSS requires at least two candidate regimes")
-    if np.std(a) == 0:
+    if np.ptp(a) == 0:
         return {"available": False, "reason": "constant sequence has no discriminating shape profile",
                 "n": len(a), "window": window}
     mp = stumpy.stump(a, m=window)

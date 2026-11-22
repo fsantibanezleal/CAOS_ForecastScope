@@ -67,6 +67,8 @@ def _unit_root_input(x) -> np.ndarray:
     No centering is performed: no-intercept regressions must retain their level.
     """
     a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("Unit-root tests require varying finite observations")
     magnitude = float(np.max(np.abs(a))) if len(a) else 0.0
     return a / magnitude if magnitude > 0 else a
 

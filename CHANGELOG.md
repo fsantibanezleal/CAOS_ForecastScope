@@ -5,7 +5,10 @@
 - Condition KPSS differencing recommendations on dimensionless deviations from the original prefix, rather than treating small measured values as constant via an absolute tolerance. Exact constants need no differences; accumulated floating arithmetic noise after differencing is not tested as a new process.
 - Route stationarity's seasonal-strength recommendation through the canonical reviewed seasonal helper, including its exact-constant policy. This removes the divergent duplicate implementation.
 - Apply positive observed-magnitude scaling at the five unit-root backend boundaries. Large unit conversions no longer trigger the demonstrated DF-GLS rank failure; input levels and explicit no-intercept hypotheses are preserved.
-- Add scale/translation, constant, tiny-process and complete-report regression controls. Return schemas, forecasting algorithms and retained published studies are unchanged.
+- Condition EMD stopping, ARCH-LM auxiliary regression, independently scaled Granger/Johansen regressions, normal/RBF change-point costs and intercept-bearing Markov fits on observed dimensionless inputs. EMD components and regime means return in source units. Other change-point costs retain their existing penalty units.
+- Refuse normalized inference on exactly constant inputs where it is undefined. Distribution reports retain raw levels and a flat QQ line while returning null shape/complexity verdicts and explicit unavailable KDE/catch22 panels; invalid BDS outputs cannot become an IID decision. Validate DCCA on the shared prefix actually used.
+- Restore NumPy's caller error policy even when the Hurst backend changes it before failing.
+- Add scale/translation, exact-constant, tiny-process, component-identity and complete-report controls. Forecasting algorithms and retained published studies are unchanged; undefined-input diagnostic fields explicitly use unavailable/null conventions.
 
 ## 0.01.004 - 2026-11-22
 

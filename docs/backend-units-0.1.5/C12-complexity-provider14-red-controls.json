@@ -1,0 +1,54 @@
+{
+  "source_sha256": "39d3ce3d551727d44963bfdbcaae0723f6673639fe83a3267cdef75224b59889",
+  "n": 256,
+  "contexts": [
+    {
+      "level": 0.0,
+      "result": {
+        "sample_entropy": null,
+        "permutation_entropy": 0.0,
+        "spectral_entropy": -0.0,
+        "bds_stat": 0.0,
+        "bds_pvalue": 1.0,
+        "iid": true,
+        "reference": "Richman & Moorman 2000, DOI 10.1152/ajpheart.2000.278.6.H2039; Bandt & Pompe 2002, DOI 10.1103/PhysRevLett.88.174102; BDS: Broock et al. 1996, DOI 10.1080/07474939608800353"
+      }
+    },
+    {
+      "level": 0.1,
+      "result": {
+        "sample_entropy": -0.0,
+        "permutation_entropy": 0.0,
+        "spectral_entropy": 0.13097504910344743,
+        "bds_stat": null,
+        "bds_pvalue": null,
+        "iid": false,
+        "reference": "Richman & Moorman 2000, DOI 10.1152/ajpheart.2000.278.6.H2039; Bandt & Pompe 2002, DOI 10.1103/PhysRevLett.88.174102; BDS: Broock et al. 1996, DOI 10.1080/07474939608800353"
+      }
+    },
+    {
+      "level": 1e-14,
+      "result": {
+        "sample_entropy": null,
+        "permutation_entropy": 0.0,
+        "spectral_entropy": -0.0,
+        "bds_stat": 0.0,
+        "bds_pvalue": 1.0,
+        "iid": true,
+        "reference": "Richman & Moorman 2000, DOI 10.1152/ajpheart.2000.278.6.H2039; Bandt & Pompe 2002, DOI 10.1103/PhysRevLett.88.174102; BDS: Broock et al. 1996, DOI 10.1080/07474939608800353"
+      }
+    },
+    {
+      "level": 1000000000000.0,
+      "result": {
+        "sample_entropy": null,
+        "permutation_entropy": 0.0,
+        "spectral_entropy": -0.0,
+        "bds_stat": 0.0,
+        "bds_pvalue": 1.0,
+        "iid": true,
+        "reference": "Richman & Moorman 2000, DOI 10.1152/ajpheart.2000.278.6.H2039; Bandt & Pompe 2002, DOI 10.1103/PhysRevLett.88.174102; BDS: Broock et al. 1996, DOI 10.1080/07474939608800353"
+      }
+    }
+  ]
+}
