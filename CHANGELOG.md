@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.01.003 - 2026-11-22
+
+- Detect exactly constant decomposition inputs and components by their observed range. Floating summation error cannot turn their undefined strength into a unit-dependent value of one.
+- Cover STL, MSTL and component strengths at fractional, tiny and large constant levels; numerical forecasting and retained experiment paths are unchanged.
+
 ## 0.01.002 - 2026-11-22
 
 - Remove absolute measured-unit floors from contextual features and normalized losses. Constant prefixes supply no normalized-loss training example; combinations use equal experts when no admissible history remains.

@@ -9,6 +9,20 @@ from forecastscope.diagnostics.seasonality import _strengths
 from forecastscope.forecasting import mf_from_quantiles
 
 
+@pytest.mark.parametrize("level", [0.1, 1e-14, 1e12])
+def test_exact_constant_decomposition_strengths_do_not_follow_summation_roundoff(level):
+    pytest.importorskip("statsmodels")
+    from forecastscope.diagnostics.seasonality import mstl_decompose, seasonal_strength, stl_decompose
+
+    values = np.full(120, level)
+    zeros = np.zeros_like(values)
+    assert _strengths(values, zeros, zeros) == (0, 0)
+    assert _strengths(zeros, values, zeros) == (0, 0)
+    assert seasonal_strength(values, 12) == 0
+    for decomposition in (stl_decompose(values, 12), mstl_decompose(values, [12, 24])):
+        assert decomposition.strength_trend == decomposition.strength_seasonal == 0
+
+
 @pytest.mark.parametrize("factor", [1e-9, 1e9])
 def test_context_features_and_allocations_do_not_depend_on_the_measurement_unit(factor):
     y = 3 + .02 * np.arange(64) + np.tile([0., 2., 1., -1.], 16)
