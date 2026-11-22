@@ -59,14 +59,27 @@ def _segments(a: np.ndarray, bkps_first_index: list[int]) -> list[dict]:
 
 
 def pelt(x, model: str = "l2", penalty: float | None = None, min_size: int = 5) -> ChangePoints:
-    """PELT with a BIC-style default penalty (2 * sigma^2 * log n for the l2 cost when none is given)."""
-    import ruptures as rpt
+    """PELT with a squared-observable-unit default penalty for the l2 cost.
 
+    Non-l2 costs require an explicit penalty in that cost's units. The l2 noise
+    proxy cannot be reused for dimensionless kernel or log-likelihood costs.
+    """
     a = _clean(x)
     n = len(a)
+    if n < 2:
+        raise ValueError("PELT requires at least two finite observations")
+    if penalty is None and model != "l2":
+        raise ValueError("Non-l2 PELT requires an explicit penalty in the cost model units")
     if penalty is None:
-        sigma2 = float(np.var(np.diff(a))) / 2.0 or 1e-8   # robust noise-variance proxy
+        sigma2 = float(np.var(np.diff(a))) / 2.0   # robust noise-variance proxy
         penalty = 2.0 * sigma2 * np.log(max(n, 2))
+    if np.ptp(a) == 0:
+        return ChangePoints(
+            name="PELT", breakpoints=[], segments=_segments(a, []), model=model, penalty=float(penalty),
+            reference="Killick, Fearnhead & Eckley 2012, JASA 107(500):1590-1598, DOI 10.1080/01621459.2012.737745",
+        )
+    import ruptures as rpt
+
     algo = rpt.Pelt(model=model, min_size=min_size).fit(a)
     ends = algo.predict(pen=penalty)                        # ruptures returns segment END indices incl. n
     bkps = [int(b) for b in ends if b < n]

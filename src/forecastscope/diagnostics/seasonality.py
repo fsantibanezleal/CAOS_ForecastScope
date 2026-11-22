@@ -111,11 +111,11 @@ class Decomp:
 
 
 def _strengths(trend, seasonal, remainder) -> tuple[float, float]:
-    var_r = float(np.var(remainder)) or 1e-12
-    var_tr = float(np.var(trend + remainder)) or 1e-12
-    var_sr = float(np.var(seasonal + remainder)) or 1e-12
-    f_t = max(0.0, 1.0 - var_r / var_tr)
-    f_s = max(0.0, 1.0 - var_r / var_sr)
+    var_r = float(np.var(remainder))
+    var_tr = float(np.var(trend + remainder))
+    var_sr = float(np.var(seasonal + remainder))
+    f_t = max(0.0, 1.0 - var_r / var_tr) if var_tr > 0 else 0.0
+    f_s = max(0.0, 1.0 - var_r / var_sr) if var_sr > 0 else 0.0
     return f_t, f_s
 
 

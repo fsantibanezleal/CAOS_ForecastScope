@@ -98,16 +98,22 @@ def memory(values, m, h):
     if first > last:
         return (), np.empty((0, 4)), np.empty((0, len(METHODS))), np.empty((0, h, len(METHODS))), ()
     origins = tuple(int(o) for o in np.unique(np.linspace(first, last, CONFIG["memory_origins"], dtype=int)))
-    features, losses, errors, paths = [], [], [], []
+    admitted, features, losses, errors, paths = [], [], [], [], []
     for origin in origins:
         prefix, truth = y[:origin], y[origin:origin+h]
+        scale = _scale(prefix, m)
+        if not np.isfinite(scale) or scale <= 0:
+            continue  # Undefined normalized loss contributes no training example.
+        admitted.append(origin)
         quantiles = np.array([gaussian_quantiles(*fn(prefix, m, h), (.1, .5, .9)) for _, _, fn in METHODS])
-        normalized_error = (quantiles[:, :, 1].T - truth[:, None]) / _scale(prefix, m)
+        normalized_error = (quantiles[:, :, 1].T - truth[:, None]) / scale
         features.append(context_features(prefix, m))
         losses.append(np.mean(abs(normalized_error), axis=0))
         errors.append(normalized_error)
         paths.append(quantiles)
-    return origins, np.asarray(features), np.asarray(losses), np.asarray(errors), tuple(paths)
+    return (tuple(admitted), np.asarray(features).reshape(-1, 4),
+            np.asarray(losses).reshape(-1, len(METHODS)),
+            np.asarray(errors).reshape(-1, h, len(METHODS)), tuple(paths))
 
 
 def temporal_splits(origins, horizon):
