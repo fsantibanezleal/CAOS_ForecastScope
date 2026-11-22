@@ -9,6 +9,112 @@ from forecastscope.diagnostics.seasonality import _strengths
 from forecastscope.forecasting import mf_from_quantiles
 
 
+@pytest.mark.parametrize("level", [0.0, 0.1, 1e-14, 1e12])
+def test_ndiffs_does_not_invent_variation_in_exact_constants(level):
+    from forecastscope.diagnostics.stationarity import ndiffs
+
+    assert ndiffs(np.full(120, level)) == 0
+
+
+@pytest.mark.parametrize("level", [0.0, 0.1, 1e-14, 1e12])
+def test_seasonal_difference_recommendation_has_no_unit_dependent_constant_pattern(level):
+    pytest.importorskip("statsmodels")
+    from forecastscope.diagnostics import stationarity
+
+    values = np.full(120, level)
+    assert stationarity.seasonal_strength(values, 12) == 0
+    assert stationarity.nsdiffs(values, 12) == 0
+
+
+@pytest.mark.parametrize("n", [60, 120])
+@pytest.mark.parametrize("unit", [1e-14, 1e-9, 1.0, 1e9, 1e14])
+def test_ndiffs_resolves_linear_prefix_without_treating_roundoff_as_a_process(n, unit):
+    pytest.importorskip("statsmodels")
+    from forecastscope.diagnostics.stationarity import ndiffs
+
+    # A linear trend requires one difference. The resulting constant increments
+    # have floating cancellation noise, especially after an offset/unit change.
+    original = np.linspace(0, 1, n)
+    assert ndiffs(unit * original) == 1
+    assert ndiffs(unit * (original + 7)) == 1
+
+
+def test_stationarity_report_uses_unit_consistent_differencing_and_strength():
+    pytest.importorskip("statsmodels")
+    pytest.importorskip("arch")
+    from forecastscope.diagnostics.stationarity import stationarity_report
+
+    rng = np.random.default_rng(24)
+    t = np.arange(144)
+    original = 3 + .02 * t + np.sin(2 * np.pi * t / 12) + rng.normal(0, .2, 144)
+    expected = stationarity_report(original, period=12)
+    assert expected["recommended_d"] == expected["recommended_D"] == 1
+    for unit, offset in [(1e-9, 0), (1e9, 0), (2, 7)]:
+        actual = stationarity_report(unit * original + offset, period=12)
+        assert actual.keys() == expected.keys()
+        assert actual["recommended_d"] == expected["recommended_d"]
+        assert actual["recommended_D"] == expected["recommended_D"]
+        np.testing.assert_allclose(actual["seasonal_strength"], expected["seasonal_strength"],
+                                   rtol=1e-11, atol=0)
+        assert [v["name"] for v in actual["tests"]] == [v["name"] for v in expected["tests"]]
+
+
+def test_tiny_nonconstant_process_is_tested_rather_than_shortcut_to_constant():
+    pytest.importorskip("statsmodels")
+    from forecastscope.diagnostics.stationarity import ndiffs
+
+    random_walk = np.cumsum(np.random.default_rng(0).normal(size=300))
+    assert ndiffs(1e-14 * random_walk) == ndiffs(random_walk) == 1
+    assert ndiffs(1e-14 * np.diff(random_walk)) == 0
+
+
+def test_full_stationarity_report_keeps_backend_admissibility_across_units():
+    pytest.importorskip("statsmodels")
+    pytest.importorskip("arch")
+    from forecastscope.diagnostics.stationarity import stationarity_report
+
+    rng = np.random.default_rng(73019)
+    rng.normal(size=240)  # Preserve the exact independent review fixture's RNG consumption.
+    values = 17 + 3 * np.sin(2 * np.pi * np.arange(240) / 12) + rng.normal(0, .05, 240)
+    expected = stationarity_report(values, period=12)
+    assert expected["recommended_d"] == 0 and expected["recommended_D"] == 1
+    for unit in (1e-9, 1e9):
+        actual = stationarity_report(unit * values, period=12)
+        assert actual["recommended_d"] == 0 and actual["recommended_D"] == 1
+        for first, converted in zip(expected["tests"], actual["tests"]):
+            assert first["name"] == converted["name"]
+            assert first["stationary"] == converted["stationary"]
+            np.testing.assert_allclose([converted["stat"], converted["pvalue"]],
+                                       [first["stat"], first["pvalue"]], rtol=1e-7, atol=1e-9)
+
+
+@pytest.mark.parametrize("regression", ["n", "c", "ct"])
+def test_adf_positive_conditioning_preserves_the_requested_regression(regression):
+    stattools = pytest.importorskip("statsmodels.tsa.stattools")
+    from forecastscope.diagnostics.stationarity import adf
+
+    values = 17 + np.random.default_rng(512).normal(size=240)
+    # In particular, centering an explicit no-intercept model would change this
+    # reference substantially. Positive rescaling must preserve its hypothesis.
+    expected = stattools.adfuller(values, regression=regression, autolag="AIC")
+    for unit in (1e-9, 1., 1e9):
+        actual = adf(unit * values, regression=regression)
+        np.testing.assert_allclose([actual.stat, actual.pvalue], expected[:2], rtol=1e-9, atol=1e-11)
+
+
+@pytest.mark.parametrize("trend", ["n", "c", "ct"])
+def test_pp_positive_conditioning_preserves_the_requested_trend(trend):
+    unitroot = pytest.importorskip("arch.unitroot")
+    from forecastscope.diagnostics.stationarity import phillips_perron
+
+    values = 17 + np.random.default_rng(512).normal(size=240)
+    expected = unitroot.PhillipsPerron(values, trend=trend)
+    for unit in (1e-9, 1., 1e9):
+        actual = phillips_perron(unit * values, trend=trend)
+        np.testing.assert_allclose([actual.stat, actual.pvalue], [expected.stat, expected.pvalue],
+                                   rtol=1e-9, atol=1e-11)
+
+
 @pytest.mark.parametrize("level", [0.1, 1e-14, 1e12])
 def test_exact_constant_decomposition_strengths_do_not_follow_summation_roundoff(level):
     pytest.importorskip("statsmodels")

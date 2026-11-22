@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.01.005 - 2026-11-22
+
+- Condition KPSS differencing recommendations on dimensionless deviations from the original prefix, rather than treating small measured values as constant via an absolute tolerance. Exact constants need no differences; accumulated floating arithmetic noise after differencing is not tested as a new process.
+- Route stationarity's seasonal-strength recommendation through the canonical reviewed seasonal helper, including its exact-constant policy. This removes the divergent duplicate implementation.
+- Apply positive observed-magnitude scaling at the five unit-root backend boundaries. Large unit conversions no longer trigger the demonstrated DF-GLS rank failure; input levels and explicit no-intercept hypotheses are preserved.
+- Add scale/translation, constant, tiny-process and complete-report regression controls. Return schemas, forecasting algorithms and retained published studies are unchanged.
+
 ## 0.01.004 - 2026-11-22
 
 - Restore the archived nonlinear report contract: the descriptive flag requires Lyapunov strictly above 0.01, zero-one K strictly above 0.5 and the surrogate flag. The numerical decision and seeded RANSAC/OLS algorithms were already unchanged; the previous description misstated its threshold and overstated the conclusion.

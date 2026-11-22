@@ -23,7 +23,7 @@ from types import ModuleType
 for _key in ('NUMBA_NUM_THREADS', 'OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS'):
     os.environ.setdefault(_key, '2')
 
-import numpy as np
+import numpy as np  # noqa: E402 -- bound numerical workers before NumPy initializes
 
 EXPECTED_ARCHIVE_SHA256 = '4c53b62e8aff184818adcd07f345be9d4587de99b40d7743aad5554e9ad21413'
 

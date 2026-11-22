@@ -68,3 +68,15 @@ The nonlinear diagnostic report uses a descriptive threshold flag, not proof of
 chaos. Version 0.1.4 restores its exact threshold description without changing the
 seeded numerical calculations. See the [eleven-family diagnostic migration audit](docs/diagnostic-migration-0.1.4.md)
 and [verified public release](docs/publication-0.1.4.json).
+
+Version 0.1.5 conditions `ndiffs` on dimensionless deviations from the original
+observed prefix. Exact constants require zero differences. After differencing,
+an accumulated machine-arithmetic bound separates unresolved cancellation noise
+from a new varying process to test. The bound derives from that prefix and the
+difference coefficients. Stationarity's seasonal-strength helper now delegates
+to the canonical seasonal implementation, so its constant policy also reaches
+`nsdiffs` and the stationarity report. Published study artifacts retain their
+original source bindings.
+The five unit-root backend inputs use positive observed-magnitude scaling to
+keep numerical rank checks independent of measurement units. This preserves
+levels, including explicitly requested no-intercept regressions.

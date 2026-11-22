@@ -1,0 +1,257 @@
+{
+  "state": "pass",
+  "distribution_version": "0.1.5",
+  "source": "D:\\_Temp\\chronoscope-20261122\\built-forecastscope-0.1.5\\forecastscope\\diagnostics\\stationarity.py",
+  "source_sha256": "0eeb921728653929c6694930e0544f166b5c62d60d78c8d754e68917923e8c58",
+  "numpy": "2.4.6",
+  "cases": {
+    "trend": [
+      {
+        "scale": 1e-09,
+        "offset_ratio": 0.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      },
+      {
+        "scale": 1e-09,
+        "offset_ratio": 17.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      },
+      {
+        "scale": 1e-09,
+        "offset_ratio": -23.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.3430738102574692
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": 0.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": 17.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": -23.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0208997095047192
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": 0.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": 17.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": -23.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.0
+      }
+    ],
+    "random_walk": [
+      {
+        "scale": 1e-09,
+        "offset_ratio": 0.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.12554853769622998
+      },
+      {
+        "scale": 1e-09,
+        "offset_ratio": 17.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.1255485376962322
+      },
+      {
+        "scale": 1e-09,
+        "offset_ratio": -23.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.12554853769620022
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": 0.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.12554853769624352
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": 17.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.1255485376962272
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": -23.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.12554853769624863
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": 0.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.12554853769621732
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": 17.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.12554853769623409
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": -23.0,
+        "d": 1,
+        "D": 0,
+        "strength": 0.1255485376962986
+      }
+    ],
+    "seasonal": [
+      {
+        "scale": 1e-09,
+        "offset_ratio": 0.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.9994747688555952
+      },
+      {
+        "scale": 1e-09,
+        "offset_ratio": 17.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.999474768855595
+      },
+      {
+        "scale": 1e-09,
+        "offset_ratio": -23.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.999474768855596
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": 0.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.9994747688555952
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": 17.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.9994747688555946
+      },
+      {
+        "scale": 1.0,
+        "offset_ratio": -23.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.9994747688555947
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": 0.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.999474768855595
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": 17.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.9994747688555958
+      },
+      {
+        "scale": 1000000000.0,
+        "offset_ratio": -23.0,
+        "d": 0,
+        "D": 1,
+        "strength": 0.9994747688555953
+      }
+    ]
+  },
+  "constants": [
+    {
+      "level": 0.0,
+      "d": 0,
+      "D": 0,
+      "strength": 0.0
+    },
+    {
+      "level": 0.1,
+      "d": 0,
+      "D": 0,
+      "strength": 0.0
+    },
+    {
+      "level": 1e-14,
+      "d": 0,
+      "D": 0,
+      "strength": 0.0
+    },
+    {
+      "level": 1000000000000.0,
+      "d": 0,
+      "D": 0,
+      "strength": 0.0
+    },
+    {
+      "level": -1000000000000.0,
+      "d": 0,
+      "D": 0,
+      "strength": 0.0
+    }
+  ],
+  "reports": [
+    {
+      "scale": 1e-09,
+      "d": 1,
+      "D": 1,
+      "strength": 0.7762789795161917
+    },
+    {
+      "scale": 1.0,
+      "d": 1,
+      "D": 1,
+      "strength": 0.7762789795161908
+    },
+    {
+      "scale": 1000000000.0,
+      "d": 1,
+      "D": 1,
+      "strength": 0.7762789795161917
+    }
+  ],
+  "review_boundary": "isolated built wheel; official public-wheel verification pending"
+}
