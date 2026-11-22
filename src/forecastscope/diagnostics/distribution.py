@@ -39,6 +39,11 @@ def _clean(x) -> np.ndarray:
     return a[np.isfinite(a)]
 
 
+def _finite(value) -> float | None:
+    result = float(value)
+    return result if np.isfinite(result) else None
+
+
 @dataclass(frozen=True)
 class DistributionSummary:
     """Moments + normality verdicts + a KDE/Q-Q payload for the distribution panel."""
@@ -46,13 +51,13 @@ class DistributionSummary:
     n: int
     mean: float
     std: float
-    skewness: float
-    kurtosis_excess: float       # excess kurtosis (0 = normal); >0 heavy-tailed
-    jarque_bera_stat: float
-    jarque_bera_pvalue: float
+    skewness: float | None
+    kurtosis_excess: float | None  # undefined without variation
+    jarque_bera_stat: float | None
+    jarque_bera_pvalue: float | None
     shapiro_stat: float | None
     shapiro_pvalue: float | None
-    normal: bool                 # combined verdict at alpha (both tests non-significant where applicable)
+    normal: bool | None           # None when the normalized tests are unavailable
     reference: str
 
 
@@ -62,17 +67,27 @@ def summary(x, alpha: float = 0.05) -> DistributionSummary:
 
     a = _clean(x)
     n = len(a)
-    skew = float(stats.skew(a))
-    kurt = float(stats.kurtosis(a, fisher=True))         # excess kurtosis
-    jb_stat, jb_p = stats.jarque_bera(a)
+    if n == 0:
+        raise ValueError("Distribution summary requires finite observations")
+    constant = np.ptp(a) == 0
+    skew = kurt = jb_stat = jb_p = None
     sh_stat, sh_p = (None, None)
-    if 3 <= n <= 5000:                                    # Shapiro is defined/reliable in this range
-        sh = stats.shapiro(a)
-        sh_stat, sh_p = float(sh[0]), float(sh[1])
-    normal = bool(jb_p >= alpha and (sh_p is None or sh_p >= alpha))
+    shapiro_applicable = 3 <= n <= 5000
+    if not constant:
+        skew = _finite(stats.skew(a))
+        kurt = _finite(stats.kurtosis(a, fisher=True))
+        jb = stats.jarque_bera(a)
+        jb_stat, jb_p = _finite(jb[0]), _finite(jb[1])
+        if shapiro_applicable:
+            sh = stats.shapiro(a)
+            sh_stat, sh_p = _finite(sh[0]), _finite(sh[1])
+    normal = None
+    if jb_p is not None and (not shapiro_applicable or sh_p is not None):
+        normal = bool(jb_p >= alpha and (sh_p is None or sh_p >= alpha))
     return DistributionSummary(
-        n=n, mean=float(np.mean(a)), std=float(np.std(a)), skewness=skew, kurtosis_excess=kurt,
-        jarque_bera_stat=float(jb_stat), jarque_bera_pvalue=float(jb_p),
+        n=n, mean=float(a[0]) if constant else float(np.mean(a)),
+        std=0.0 if constant else float(np.std(a)), skewness=skew, kurtosis_excess=kurt,
+        jarque_bera_stat=jb_stat, jarque_bera_pvalue=jb_p,
         shapiro_stat=sh_stat, shapiro_pvalue=sh_p, normal=normal,
         reference="Jarque & Bera 1980, DOI 10.1016/0165-1765(80)90024-5; Shapiro & Wilk 1965, DOI 10.1093/biomet/52.3-4.591",
     )
@@ -83,6 +98,8 @@ def kde_curve(x, num: int = 100) -> dict:
     from scipy import stats
 
     a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("KDE requires varying finite observations")
     kde = stats.gaussian_kde(a)
     grid = np.linspace(float(a.min()), float(a.max()), num)
     return {"grid": grid.tolist(), "density": kde(grid).tolist(),
@@ -94,9 +111,15 @@ def qq_points(x) -> dict:
     from scipy import stats
 
     a = _clean(x)
-    (osm, osr), (slope, intercept, r) = stats.probplot(a, dist="norm")
+    if not len(a):
+        raise ValueError("Q-Q points require finite observations")
+    if np.ptp(a) == 0:
+        osm, osr = stats.probplot(a, dist="norm", fit=False)
+        slope, intercept, r = 0.0, float(a[0]), None
+    else:
+        (osm, osr), (slope, intercept, r) = stats.probplot(a, dist="norm")
     return {"theoretical": osm.tolist(), "sample": osr.tolist(),
-            "slope": float(slope), "intercept": float(intercept), "r": float(r),
+            "slope": float(slope), "intercept": float(intercept), "r": _finite(r) if r is not None else None,
             "reference": "Wilk & Gnanadesikan 1968, Biometrika 55(1):1-17, DOI 10.1093/biomet/55.1.1"}
 
 
@@ -104,9 +127,9 @@ def qq_points(x) -> dict:
 class ComplexitySummary:
     """Entropy/complexity measures + the BDS nonlinearity verdict (predictability of the ordering)."""
 
-    sample_entropy: float
-    permutation_entropy: float   # normalized to [0, 1]
-    spectral_entropy: float      # normalized to [0, 1]
+    sample_entropy: float | None
+    permutation_entropy: float | None   # None when no variation supports the panel
+    spectral_entropy: float | None
     bds_stat: float | None
     bds_pvalue: float | None
     iid: bool | None             # BDS verdict: True if not rejected (behaves i.i.d.)
@@ -119,16 +142,20 @@ def complexity(x, order: int = 3, bds_dim: int = 2, alpha: float = 0.05) -> Comp
     from statsmodels.tsa.stattools import bds as _bds
 
     a = _clean(x)
-    samp = float(ant.sample_entropy(a))
-    perm = float(ant.perm_entropy(a, order=order, normalize=True))
-    spec = float(ant.spectral_entropy(a, sf=1.0, method="welch", normalize=True))
+    varying = len(a) > 1 and np.ptp(a) > 0
+    samp = _finite(ant.sample_entropy(a)) if varying else None
+    perm = _finite(ant.perm_entropy(a, order=order, normalize=True)) if varying else None
+    spec = _finite(ant.spectral_entropy(a, sf=1.0, method="welch", normalize=True)) if varying else None
     bds_stat = bds_p = None
     iid = None
-    if len(a) >= 20:
+    if varying and len(a) >= 20:
         try:
             stat, pval = _bds(a, max_dim=bds_dim)
-            bds_stat = float(np.ravel(stat)[-1])          # statistic at the largest embedding dim
-            bds_p = float(np.ravel(pval)[-1])
+            bds_stat = _finite(np.ravel(stat)[-1])
+            bds_p = _finite(np.ravel(pval)[-1])
+            if bds_stat is None or bds_p is None:
+                bds_stat = bds_p = None
+                raise ValueError("BDS returned nonfinite statistics")
             iid = bool(bds_p >= alpha)
         except Exception:  # noqa: BLE001 - BDS can fail on degenerate input; record as unavailable
             warnings.warn("BDS diagnostic unavailable", RuntimeWarning, stacklevel=2)
@@ -155,6 +182,9 @@ def catch22_features(x) -> dict:
                 "reason": "pycatch22 not installed (pin it: requirements-precompute.txt)",
                 "reference": "Lubba et al. 2019, Data Min. Knowl. Disc. 33(6):1821-1852, DOI 10.1007/s10618-019-00647-x"}
     a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        return {"available": False, "reason": "constant sequence has no normalized catch22 features",
+                "reference": "Lubba et al. 2019, DOI 10.1007/s10618-019-00647-x"}
     res = pycatch22.catch22_all(a.tolist(), catch24=True)
     return {"available": True,
             "features": dict(zip(res["names"], [float(v) for v in res["values"]])),
@@ -166,12 +196,16 @@ def distribution_report(x, order: int = 3) -> dict:
     a = _clean(x)
     s = summary(a)
     c = complexity(a, order=order)
+    try:
+        kde = kde_curve(a)
+    except (ValueError, np.linalg.LinAlgError) as exc:
+        kde = {"available": False, "reason": str(exc)}
     return {
         "n": len(a),
         "summary": {"mean": s.mean, "std": s.std, "skewness": s.skewness,
                     "kurtosis_excess": s.kurtosis_excess, "jarque_bera_pvalue": s.jarque_bera_pvalue,
                     "shapiro_pvalue": s.shapiro_pvalue, "normal": s.normal, "reference": s.reference},
-        "kde": kde_curve(a),
+        "kde": kde,
         "qq": qq_points(a),
         "complexity": {"sample_entropy": c.sample_entropy, "permutation_entropy": c.permutation_entropy,
                        "spectral_entropy": c.spectral_entropy, "bds_pvalue": c.bds_pvalue, "iid": c.iid,

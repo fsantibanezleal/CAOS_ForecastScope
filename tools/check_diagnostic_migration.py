@@ -23,7 +23,7 @@ from types import ModuleType
 for _key in ('NUMBA_NUM_THREADS', 'OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS'):
     os.environ.setdefault(_key, '2')
 
-import numpy as np
+import numpy as np  # noqa: E402 -- bound numerical workers before NumPy initializes
 
 EXPECTED_ARCHIVE_SHA256 = '4c53b62e8aff184818adcd07f345be9d4587de99b40d7743aad5554e9ad21413'
 
@@ -35,6 +35,18 @@ def digest(raw):
 def procedures(source):
     return {node.name: digest(ast.dump(node, include_attributes=False).encode())
             for node in ast.parse(source).body if isinstance(node, (ast.FunctionDef, ast.ClassDef))}
+
+
+def output_digest(value):
+    def serialise(obj):
+        if is_dataclass(obj):
+            return asdict(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if isinstance(obj, np.generic):
+            return obj.item()
+        raise TypeError(type(obj).__name__)
+    return digest(json.dumps(value, default=serialise, sort_keys=True, separators=(',', ':')).encode())
 
 
 def equal(actual, expected, path='', atol=0.0):
@@ -92,11 +104,30 @@ def main():
             exec(compile(old, module.__file__, 'exec'), module.__dict__)  # noqa: S102
             originals[source.stem] = module
     # The frozen product volatility module already delegates to the public package.
-    # Its numerical implementation is exactly the originally published 0.1.1 file.
+    # Protect every unchanged original public procedure. ARCH-LM now explicitly
+    # conditions its auxiliary regression; this deliberate boundary correction
+    # must not exempt any other volatility procedure from the source audit.
     volatility = root/'src/forecastscope/diagnostics/volatility.py'
     initial = subprocess.check_output(['git', 'show', 'v0.01.001:src/forecastscope/diagnostics/volatility.py'], cwd=root)
-    assert initial == volatility.read_bytes(), 'Volatility differs from the original public 0.1.1 implementation'
+    initial_procedures, current_procedures = procedures(initial), procedures(volatility.read_bytes())
+    assert initial_procedures.keys() == current_procedures.keys(), 'Volatility procedure inventory differs'
+    assert {name for name in initial_procedures
+            if initial_procedures[name] != current_procedures[name]} == {'arch_lm'}, 'Unexpected volatility change'
     audit['volatility']['original_public_0.1.1_sha256'] = digest(initial)
+    audit['volatility']['original_public_0.1.1_procedures'] = initial_procedures
+    audit['volatility']['intentional_changed_procedures'] = ['arch_lm']
+    original_volatility = ModuleType(package.__name__+'.original_public_volatility')
+    sys.modules[original_volatility.__name__] = original_volatility
+    exec(compile(initial, 'verified-git-v0.01.001/volatility.py', 'exec'), original_volatility.__dict__)  # noqa: S102
+    originals['volatility'] = original_volatility
+    original_arch_lm = original_volatility.arch_lm
+
+    def conditioned_original_arch_lm(x, nlags=12, alpha=.05, demean=True):
+        a = np.asarray(x, dtype=float)
+        residual = a - a.mean() if demean else a
+        return original_arch_lm(residual / np.max(np.abs(residual)), nlags=nlags, alpha=alpha, demean=False)
+
+    original_volatility.arch_lm = conditioned_original_arch_lm
     rng = np.random.default_rng(20261122)
     t = np.arange(320)
     periodic = 20 + .015*t + np.sin(2*np.pi*t/24) + .15*rng.normal(size=len(t))
@@ -130,13 +161,46 @@ def main():
     ]
     results = []
     for family, name, inputs, keywords in probes:
-        original = getattr(originals[family], name)(*inputs, **keywords)
+        reference_inputs = inputs
+        reference_recipe = 'unchanged verified original inputs'
+        if family == 'filters' and name == 'emd':
+            offset = float(inputs[0][0])
+            scale = float(np.max(np.abs(inputs[0] - offset)))
+            reference_inputs = ((inputs[0] - offset) / scale,)
+            reference_recipe = 'verified archived EMD on (x-x[0])/max(abs(x-x[0])); restore components and residual units'
+        if family == 'causality':
+            reference_inputs = tuple(x / np.max(np.abs(x)) for x in inputs)
+            reference_recipe = 'verified archived relationship backends on independently positive-scaled inputs'
+        if family == 'volatility':
+            reference_recipe = 'verified original public 0.1.1 report; only ARCH-LM backend receives max-absolute-scaled residuals'
+        original = getattr(originals[family], name)(*reference_inputs, **keywords)
+        if family == 'filters' and name == 'emd':
+            original = asdict(original)
+            original['imfs'] *= scale
+            original['residual'] = original['residual'] * scale + offset
         current = getattr(importlib.import_module('forecastscope.diagnostics.'+family), name)(*inputs, **keywords)
+        raw_comparison = {'state': 'same verified reference'}
+        if reference_recipe != 'unchanged verified original inputs':
+            if family == 'volatility':
+                original_volatility.arch_lm = original_arch_lm
+            try:
+                raw_original = getattr(originals[family], name)(*inputs, **keywords)
+            finally:
+                if family == 'volatility':
+                    original_volatility.arch_lm = conditioned_original_arch_lm
+            raw_comparison = {'sha256': output_digest(raw_original)}
+            try:
+                equal(current, raw_original, family+'/'+name, atol=5e-14 if family == 'causality' else 0)
+                raw_comparison['state'] = 'also matches unconditioned original'
+            except AssertionError as exc:
+                raw_comparison.update(state='intentional boundary correction differs from raw original',
+                                      difference=str(exc)[:1800])
         # Independent normalization only changes dimensionless CCF roundoff.
         equal(current, original, family+'/'+name, atol=5e-14 if family == 'causality' else 0)
         results.append({'family': family, 'procedure': name, 'state': 'pass',
                         'input_sha256': [digest(np.asarray(x, dtype='<f8').tobytes()) for x in inputs],
-                        'keywords': keywords})
+                        'keywords': keywords, 'reference_recipe': reference_recipe,
+                        'raw_original_comparison': raw_comparison})
         print('PASS', family, name, flush=True)
     output = {'state': 'pass', 'archive_sha256': receipt['archive_sha256'],
               'checker_sha256': digest(Path(__file__).read_bytes()),

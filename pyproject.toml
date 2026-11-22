@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "forecastscope"
-version = "0.1.4"
+version = "0.1.5"
 description = "Finite-prefix forecasting, temporal forecast combinations and sequence diagnostics."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -38,4 +38,5 @@ line-length = 110
 target-version = "py311"
 
 [tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "RUF100", "BLE001", "S102"]
 ignore = ["E741"]

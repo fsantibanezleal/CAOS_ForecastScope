@@ -82,6 +82,8 @@ def chaos_measures(x, emb_dim: int = 4, lag: int = 1, seed: int = 0) -> ChaosMea
     import nolds
 
     a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("Chaos scaling estimators require varying finite observations")
     if not isinstance(seed, int) or not 0 <= seed < 2**32:
         raise ValueError("seed must be a nonnegative 32-bit integer")
     _, d2_debug = nolds.corr_dim(a, emb_dim=emb_dim, lag=lag, fit="poly", debug_data=True)
@@ -212,6 +214,8 @@ def zero_one_test(x, n_c: int = 100, seed: int = 0) -> float:
     median asymptotic growth rate over the random phases.
     """
     a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("Zero-one diagnostic requires varying finite observations")
     n = len(a)
     rng = np.random.default_rng(seed)
     a = a - a.mean()

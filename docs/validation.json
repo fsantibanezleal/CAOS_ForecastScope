@@ -1,58 +1,111 @@
 {
-  "state": "published 0.1.4; application admission and deployment are separate",
-  "version": "0.1.4",
-  "source_commit": "13a4ba84b68e0b342c3852dec8c3cab5e61ec1d5",
+  "state": "final source+built-wheel author and independent grouped acceptance passed; remote release and official wheel gates pending",
+  "version": "0.1.5",
   "checks": [
     {
-      "check": "complete source suite",
-      "passed": 155,
-      "warnings_retained": 15
+      "check": "source-tests.xml",
+      "passed": 196,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "warnings_retained": 17,
+      "receipt": "docs/backend-units-0.1.5/source-tests.xml",
+      "sha256": "52132b961142795316d741a79f0621643c75fbc8ccc9d97a3933838c9f2efd0f"
     },
     {
-      "check": "complete independently imported official public-wheel suite",
-      "passed": 155,
-      "warnings_retained": 15
+      "check": "built-wheel-tests.xml",
+      "passed": 196,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "warnings_retained": 17,
+      "receipt": "docs/backend-units-0.1.5/built-wheel-tests.xml",
+      "sha256": "1bce823e2a7f7042bd687fa9703fced6f0d3af39603464b32fe8a950909ce290"
     },
     {
-      "check": "independent contract and dimensional review",
-      "passed": 24,
-      "additional_control": "complete seeded fit identical across unrelated global NumPy states"
-    },
-    {
-      "check": "verified original-archive diagnostic source audit",
+      "check": "verified original archive diagnostic comparison",
+      "passed": 19,
       "families": 11,
-      "executed_comparisons": 19,
-      "receipt": "docs/diagnostic-migration-0.1.4.json"
+      "receipt": "docs/diagnostic-migration-0.1.5.json",
+      "raw_ordinary_outputs_also_match": 19,
+      "relative_tolerance": 5e-12,
+      "absolute_tolerance": "zero except dimensionless CCF5e-14"
     },
     {
-      "check": "Ruff0.16.10, build, Twine and built-wheel member checks",
-      "state": "pass"
-    },
-    {
-      "check": "official public distribution hashes and source members",
-      "distributions": 2,
-      "matched_modules": 19
-    },
-    {
-      "check": "separate candidate/develop/main CI",
-      "state": "all jobs passed",
-      "runs": [
-        44993690726,
-        44993836655,
-        44994036832
-      ]
-    },
-    {
-      "check": "trusted PyPI publication",
+      "check": "Ruff,build,Twine and19module threeway source/wheel/install identities",
       "state": "pass",
-      "run": 44994208107
+      "receipt": "docs/backend-units-0.1.5/built-wheel-identity.json"
+    },
+    {
+      "check": "independent final grouped source acceptance",
+      "state": "pass",
+      "targeted_tests": 58,
+      "receipt": "docs/backend-units-0.1.5/independent-source-seal.json",
+      "sha256": "6256734ca31c6349dbc20d35544ea40ca2e22a24349f8c540abd15f3abb9b837"
+    },
+    {
+      "check": "independent final grouped built-wheel acceptance",
+      "state": "pass",
+      "verified_modules": 19,
+      "protocols": 5,
+      "numeric_fields_matching_source": 7363,
+      "maximum_numeric_difference": 0,
+      "receipt": "docs/backend-units-0.1.5/independent-built-wheel-seal.json",
+      "sha256": "98a9dcbdfc31bb175d077788f21490f87538f400b8742a78cd13a26c95377a88"
     }
+  ],
+  "source_sha256": {
+    "src/forecastscope/__init__.py": "3b5f70e8a4923d0514ce51c90da9c066d25d050f0cbd47410c17c3ea5b4a25c8",
+    "src/forecastscope/api.py": "a38e0890176eaa1980a5bfb39fb852c00d17799f4901bb768805ec94ead4e830",
+    "src/forecastscope/combinations/__init__.py": "95eae7e616908c6d993649984747d2c09f6026fb0f9b1ff4830153e2e1926a3b",
+    "src/forecastscope/combinations/context_memory.py": "738a34f04efbfa1246e73d71512189c3a5276ba9fdc13e907714cae139d7093f",
+    "src/forecastscope/combinations/validated.py": "d5baf809bb79bd5f1dd6f996741e40f8a5cd7fa6eaa86ff11dee54696a9edcfa",
+    "src/forecastscope/diagnostics/__init__.py": "0082636cf6110170eb52fa6f9067d34492aa21027772e19acc4030f49d195d46",
+    "src/forecastscope/diagnostics/autocorrelation.py": "6b2109a70adfd2db4881a3673592de95fcfcd33018a3fe4a7419b04b8c1003bd",
+    "src/forecastscope/diagnostics/causality.py": "98db620e9ce9ac0aa1265b48dabe8163d4b28a51ef1c83ac3c72b9b744c47895",
+    "src/forecastscope/diagnostics/changepoints.py": "8185e6677800bb54c20a52bb15f0eb78be3dcdc63e98269903733d2d8bf1ae9a",
+    "src/forecastscope/diagnostics/distribution.py": "91b933359db44f7e4437c002827aa1a1a1b72600e0dadb4fdf3a45332f44f963",
+    "src/forecastscope/diagnostics/filters.py": "52964f974a068fed308d93bbc0aa2bfb7974efecbc991f91d80f05243c6bab4a",
+    "src/forecastscope/diagnostics/fractal.py": "e8919bbccf9fabfb6d1670e08d48334a4f90d105869e068b1dc9df1a320a2555",
+    "src/forecastscope/diagnostics/nonlinear.py": "8cf0fd024707ecfdbe17421b28bf40a931b9427ac71243816e2a1a2b91a275cb",
+    "src/forecastscope/diagnostics/seasonality.py": "99cb97f3d1d9d06e813e9f14556470cb9df7ca207068702f6ef38c4e9b9b8c67",
+    "src/forecastscope/diagnostics/sequence.py": "9a6779ea608e01cc908dd99c4a65298ab3766e1e500e04c9a306f5d07ed1c717",
+    "src/forecastscope/diagnostics/stationarity.py": "33da7c4c2b4f1426731a620becf5b1a2b6e9896dc98c8716298aed0ddce6090e",
+    "src/forecastscope/diagnostics/volatility.py": "250b504310fc780286dbbba70291d9b0261b3276069195a0b6631145308ad06d",
+    "src/forecastscope/forecasting.py": "3e92b93de74d4c44ca9956cab4f5cbb5e0b6d3781a962d197086e722826ae123",
+    "src/forecastscope/types.py": "223748654bfe59dc6579fb8b2e55f75856df244d9885149dc63ec0d7372e43cf",
+    "tests/test_diagnostic_boundaries.py": "a5a56de97cf12c0852eba94bb8d02e4299a93e8d6d9ac313e0aee8fbb32d3696",
+    "tests/test_observable_units.py": "0df06715270aa3b4b33ca72f674d4492459b39c049254ddbbd21f22114e0cf51"
+  },
+  "bounded_backend_receipts": {
+    "docs/backend-units-0.1.5/built-wheel-identity.json": "1c49b47d9f4a735818f08f2dc3bd38762ee7866119a66096d1a21fddda573564",
+    "docs/backend-units-0.1.5/C12-complexity-provider14-red-controls.json": "747197793724ef0e7d1e3e5d04f81fe2c3ad70f69fbbced6c467247c36b0e21c",
+    "docs/backend-units-0.1.5/C9-C10-provider14-red-controls.json": "be12fdb9b23891c2349b2774f7b6a8bff40f24e64feae7a0bbf8d8c88472b5fd",
+    "docs/backend-units-0.1.5/fixtures.json": "1725662ad6e3eeda51ae4adf71c2d469254dbaca5fa47e94d230fea02dfc29af",
+    "docs/backend-units-0.1.5/four-family-provider14-unit-controls.json": "309490aa9c8227b0099764c94b135b8a405b7a102013e055589117167d1aabfe",
+    "docs/backend-units-0.1.5/nonlinear-seasonality-provider14-controls.json": "b79392eec38c267d4760191d68a43e653a64f1ab5b3bd6b67508ff02a5a7b04a",
+    "docs/backend-units-0.1.5/pair-cost-regime-provider14-red-controls.json": "3295a4e6f4e42ce21ebaa0f697757069f902d2d9cc133929171ccc7bf78a7fa2"
+  },
+  "historical_c7_c8_candidate_receipts": "docs/stationarity-units-0.1.5 (earlier C7/C8-only candidate; superseded wheel7e70... is not the final grouped wheel)",
+  "bounded_search": {
+    "remaining_isclose": "api convex-weight sum; dimensionless",
+    "scope": "Eleven diagnostic families, observed-scale backend fits, exactconstant normalized inference and global numerical state. Finite controls only."
+  },
+  "scope": "Numerical diagnostic boundaries and explicit unavailable policies. Forecasting algorithms and retained published studies unchanged. Undefined-input distribution fields now null where no inferential verdict is defined.",
+  "release_blockers": [
+    "Feature/develop/main remote CI and promotions",
+    "Zenodo GitHub integration ready before actual newest GitHub release",
+    "Trusted PyPI publication and independent official wheel controls"
   ],
   "historical_validation": [
     "docs/validation-0.1.0.json",
     "docs/validation-0.1.2.json",
-    "docs/validation-0.1.3.json"
+    "docs/validation-0.1.3.json",
+    "docs/validation-0.1.4.json"
   ],
-  "publication": "docs/publication-0.1.4.json",
-  "scope": "Restored bounded nonlinear report wording and named unchanged thresholds. No changed diagnostic numerical helper, forecast algorithm or accuracy experiment."
+  "lint_runtime_compatibility": {
+    "0.15.18": "pass",
+    "0.16.10": "pass",
+    "change": "Explicit stronger consistent rule set; only new-test import ordering changed; numerical module identities retained"
+  }
 }

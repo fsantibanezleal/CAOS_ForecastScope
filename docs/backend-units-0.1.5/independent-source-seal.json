@@ -1,0 +1,50 @@
+{
+  "state": "source-pass-built-and-public-wheel-pending",
+  "source_modules_sha256": {
+    "forecastscope/api.py": "a38e0890176eaa1980a5bfb39fb852c00d17799f4901bb768805ec94ead4e830",
+    "forecastscope/forecasting.py": "3e92b93de74d4c44ca9956cab4f5cbb5e0b6d3781a962d197086e722826ae123",
+    "forecastscope/types.py": "223748654bfe59dc6579fb8b2e55f75856df244d9885149dc63ec0d7372e43cf",
+    "forecastscope/__init__.py": "3b5f70e8a4923d0514ce51c90da9c066d25d050f0cbd47410c17c3ea5b4a25c8",
+    "forecastscope/combinations/context_memory.py": "738a34f04efbfa1246e73d71512189c3a5276ba9fdc13e907714cae139d7093f",
+    "forecastscope/combinations/validated.py": "d5baf809bb79bd5f1dd6f996741e40f8a5cd7fa6eaa86ff11dee54696a9edcfa",
+    "forecastscope/combinations/__init__.py": "95eae7e616908c6d993649984747d2c09f6026fb0f9b1ff4830153e2e1926a3b",
+    "forecastscope/diagnostics/autocorrelation.py": "6b2109a70adfd2db4881a3673592de95fcfcd33018a3fe4a7419b04b8c1003bd",
+    "forecastscope/diagnostics/causality.py": "98db620e9ce9ac0aa1265b48dabe8163d4b28a51ef1c83ac3c72b9b744c47895",
+    "forecastscope/diagnostics/changepoints.py": "8185e6677800bb54c20a52bb15f0eb78be3dcdc63e98269903733d2d8bf1ae9a",
+    "forecastscope/diagnostics/distribution.py": "91b933359db44f7e4437c002827aa1a1a1b72600e0dadb4fdf3a45332f44f963",
+    "forecastscope/diagnostics/filters.py": "52964f974a068fed308d93bbc0aa2bfb7974efecbc991f91d80f05243c6bab4a",
+    "forecastscope/diagnostics/fractal.py": "e8919bbccf9fabfb6d1670e08d48334a4f90d105869e068b1dc9df1a320a2555",
+    "forecastscope/diagnostics/nonlinear.py": "8cf0fd024707ecfdbe17421b28bf40a931b9427ac71243816e2a1a2b91a275cb",
+    "forecastscope/diagnostics/seasonality.py": "99cb97f3d1d9d06e813e9f14556470cb9df7ca207068702f6ef38c4e9b9b8c67",
+    "forecastscope/diagnostics/sequence.py": "9a6779ea608e01cc908dd99c4a65298ab3766e1e500e04c9a306f5d07ed1c717",
+    "forecastscope/diagnostics/stationarity.py": "33da7c4c2b4f1426731a620becf5b1a2b6e9896dc98c8716298aed0ddce6090e",
+    "forecastscope/diagnostics/volatility.py": "250b504310fc780286dbbba70291d9b0261b3276069195a0b6631145308ad06d",
+    "forecastscope/diagnostics/__init__.py": "0082636cf6110170eb52fa6f9067d34492aa21027772e19acc4030f49d195d46"
+  },
+  "portable_control_scripts_sha256": {
+    "independent-stationarity-controls.py": "be22cd8ab0e6c842e40f060f85329399386d98937ab763837241b750af520153",
+    "independent-stationarity-backend-controls.py": "23a8a3166f4b1f2a24c5b4271784d1df0af48d011423dc2f3192eec5c3dbdede",
+    "independent-four-family-units.py": "a25438ab66fc91273c8375f7f74bda36a62910c1334beb7a0ea4698f3c6ee2e5",
+    "independent-nonlinear-seasonality-controls.py": "612efe6401b2e404584db3cbf656b86b6ccd3ce342412ece3425c4cf473593bb",
+    "independent-pair-cost-regime-controls.py": "77ff019f5d835cb04659e4cecfa0a7757a82dc4e6480c4bd92aa695d107f60e5"
+  },
+  "receipts_sha256": {
+    "C7-provider15-grouped-source-green.json": "33e9b6bc7a3895770cfd9a2a67abd479c68ca9b1c83e1694c1089ef283111886",
+    "C8-provider15-grouped-source-green.json": "ecee7045ebafe5d530051fcba95d5381b5b8d3ca2efde3ab71bc93ca6a5bf230",
+    "C9-C10-C14-provider15-source-controls.json": "15cb9bed379396083a51056622d51391b12285ed6aa7f227fe79a28c46cfe1fa",
+    "four-family-provider15-source-controls.json": "85d39b474d6d8950012a85f7de682b1bfebd5add6439abd8c3640bb7cef91549",
+    "nonlinear-seasonality-provider15-source-controls.json": "40ff83ad61ffd27c7e61d3ee1061090060fb8afba26b1ee70649059256787984"
+  },
+  "independent_targeted_tests": 58,
+  "boundaries": [
+    "C7 differencing arithmetic resolution",
+    "C8 backend regression support and no-intercept hypotheses",
+    "C9 EMD component homogeneity/reconstruction",
+    "C10 ARCH residual conditioning",
+    "C11 exactconstant profile unavailability",
+    "C12 normalized constant availability and meaningful raw operations",
+    "C13 NumPy error-state isolation",
+    "C14 paired tests/normal+rbf segmentation/Markov conditioning"
+  ],
+  "remaining": "exact final builtwheel/publicwheel and product integration/literalbaseline review"
+}

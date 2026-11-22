@@ -55,6 +55,13 @@ def _clean(x) -> np.ndarray:
     return a[np.isfinite(a)]
 
 
+def _varying(x) -> np.ndarray:
+    a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("Normalized dependence diagnostics require varying observations")
+    return a
+
+
 def bartlett_band(n: int, alpha: float = 0.05) -> float:
     """The +/- z_{1-alpha/2}/sqrt(n) significance bound for the ACF of an independent series.
 
@@ -74,7 +81,7 @@ def acf(x, nlags: int = 40, alpha: float = 0.05) -> Correlogram:
     """Sample autocorrelation function with the Bartlett significance band (statsmodels, FFT-based)."""
     from statsmodels.tsa.stattools import acf as _acf
 
-    a = _clean(x)
+    a = _varying(x)
     n = len(a)
     nlags = min(nlags, n - 1)
     values = _acf(a, nlags=nlags, fft=True, missing="drop")
@@ -91,7 +98,7 @@ def pacf(x, nlags: int = 40, alpha: float = 0.05) -> Correlogram:
     """Partial autocorrelation via the Durbin-Levinson recursion (``method='ld'``) with the Bartlett band."""
     from statsmodels.tsa.stattools import pacf as _pacf
 
-    a = _clean(x)
+    a = _varying(x)
     n = len(a)
     nlags = min(nlags, n - 1)
     values = _pacf(a, nlags=nlags, method="ld")
@@ -125,7 +132,7 @@ def ljung_box(x, lags: int | list[int] = 10, model_df: int = 0, alpha: float = 0
     """
     from statsmodels.stats.diagnostic import acorr_ljungbox
 
-    a = _clean(x)
+    a = _varying(x)
     m = max(lags) if isinstance(lags, (list, tuple)) else int(lags)
     res = acorr_ljungbox(a, lags=[m], model_df=model_df, return_df=True)
     stat = float(res["lb_stat"].iloc[0])
@@ -141,7 +148,7 @@ def box_pierce(x, lags: int = 10, model_df: int = 0, alpha: float = 0.05) -> Por
     """Box-Pierce: the older portmanteau; Ljung-Box is its small-sample refinement."""
     from statsmodels.stats.diagnostic import acorr_ljungbox
 
-    a = _clean(x)
+    a = _varying(x)
     res = acorr_ljungbox(a, lags=[int(lags)], boxpierce=True, model_df=model_df, return_df=True)
     stat = float(res["bp_stat"].iloc[0])
     pvalue = float(res["bp_pvalue"].iloc[0])

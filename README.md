@@ -68,3 +68,33 @@ The nonlinear diagnostic report uses a descriptive threshold flag, not proof of
 chaos. Version 0.1.4 restores its exact threshold description without changing the
 seeded numerical calculations. See the [eleven-family diagnostic migration audit](docs/diagnostic-migration-0.1.4.md)
 and [verified public release](docs/publication-0.1.4.json).
+
+Version 0.1.5 conditions `ndiffs` on dimensionless deviations from the original
+observed prefix. Exact constants require zero differences. After differencing,
+an accumulated machine-arithmetic bound separates unresolved cancellation noise
+from a new varying process to test. The bound derives from that prefix and the
+difference coefficients. Stationarity's seasonal-strength helper now delegates
+to the canonical seasonal implementation, so its constant policy also reaches
+`nsdiffs` and the stationarity report. Published study artifacts retain their
+original source bindings.
+The five unit-root backend inputs use positive observed-magnitude scaling to
+keep numerical rank checks independent of measurement units. This preserves
+levels, including explicitly requested no-intercept regressions.
+
+The same release conditions demonstrated numerical-unit boundaries in EMD,
+ARCH-LM, Granger/Johansen regressions, normal/RBF change-point costs and Markov
+regime fitting. Conditioning derives from the supplied observations; EMD
+components and fitted regime means are restored to the original units. An
+explicit penalty for a normal or RBF cost applies to its dimensionless
+conditioned cost. The l2 cost and its squared-unit penalty are unchanged.
+
+Exactly constant data retain meaningful raw levels, lag pairs, embeddings and
+surrogate values. Normalized inferential helpers that need variation raise a
+`ValueError` instead of deriving structure from floating summation noise.
+Distribution reports keep the exact mean, zero standard deviation and a flat
+QQ line, but return null shape/normality/complexity verdicts and explicit
+unavailable KDE/catch22 panels. A nonfinite BDS statistic supplies no IID verdict.
+Matrix profiles likewise mark an exactly constant input unavailable. Hurst
+backend failures restore the caller's NumPy error policy before fallback.
+These are bounded numerical corrections, not a fresh scientific study or a
+claim of invariance for every ill-conditioned input and diagnostic backend.

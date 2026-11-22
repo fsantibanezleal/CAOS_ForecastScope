@@ -54,8 +54,20 @@ def _segments(a: np.ndarray, bkps_first_index: list[int]) -> list[dict]:
     out = []
     for s, e in pairwise(bounds):
         seg = a[s:e]
-        out.append({"start": int(s), "end": int(e), "mean": float(np.mean(seg)), "std": float(np.std(seg))})
+        constant = np.ptp(seg) == 0
+        out.append({"start": int(s), "end": int(e),
+                    "mean": float(seg[0]) if constant else float(np.mean(seg)),
+                    "std": 0.0 if constant else float(np.std(seg))})
     return out
+
+
+def _cost_input(a: np.ndarray, model: str) -> np.ndarray:
+    """Normal covariance bias/RBF zero-median fallback use dimensionless variation."""
+    if model not in {"normal", "rbf"}:
+        return a
+    centered = a - a.min()
+    scale = float(np.max(centered))
+    return centered / scale if scale > 0 else centered
 
 
 def pelt(x, model: str = "l2", penalty: float | None = None, min_size: int = 5) -> ChangePoints:
@@ -80,7 +92,7 @@ def pelt(x, model: str = "l2", penalty: float | None = None, min_size: int = 5) 
         )
     import ruptures as rpt
 
-    algo = rpt.Pelt(model=model, min_size=min_size).fit(a)
+    algo = rpt.Pelt(model=model, min_size=min_size).fit(_cost_input(a, model))
     ends = algo.predict(pen=penalty)                        # ruptures returns segment END indices incl. n
     bkps = [int(b) for b in ends if b < n]
     return ChangePoints(
@@ -94,7 +106,7 @@ def binseg(x, n_bkps: int, model: str = "l2", min_size: int = 5) -> ChangePoints
     import ruptures as rpt
 
     a = _clean(x)
-    algo = rpt.Binseg(model=model, min_size=min_size).fit(a)
+    algo = rpt.Binseg(model=model, min_size=min_size).fit(_cost_input(a, model))
     ends = algo.predict(n_bkps=n_bkps)
     bkps = [int(b) for b in ends if b < len(a)]
     return ChangePoints(
@@ -144,14 +156,20 @@ def markov_regimes(x, k_regimes: int = 2, switching_variance: bool = True) -> Re
     from statsmodels.tsa.regime_switching.markov_regression import MarkovRegression
 
     a = _clean(x)
-    model = MarkovRegression(a, k_regimes=k_regimes, trend="c", switching_variance=switching_variance)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("Markov regimes require varying finite observations")
+    offset = float(a.min())
+    scale = float(np.max(a - offset))
+    # This model includes a regime intercept. Translation and positive scaling
+    # preserve its likelihood optimum; restore each fitted mean to source units.
+    model = MarkovRegression((a - offset) / scale, k_regimes=k_regimes, trend="c", switching_variance=switching_variance)
     res = model.fit(disp=False)
     smoothed = np.asarray(res.smoothed_marginal_probabilities)
     if smoothed.ndim == 1:
         smoothed = smoothed.reshape(-1, k_regimes)
     # Pull each regime's mean by its named parameter (the leading params are transition probabilities).
     names = list(res.model.param_names)
-    means = [float(res.params[names.index(f"const[{j}]")]) for j in range(k_regimes)]
+    means = [float(res.params[names.index(f"const[{j}]")]) * scale + offset for j in range(k_regimes)]
     tm = np.asarray(res.regime_transition)[..., 0] if hasattr(res, "regime_transition") else np.full((k_regimes, k_regimes), np.nan)
     return RegimeFit(
         k_regimes=k_regimes, regime_means=means, smoothed_probabilities=smoothed,

@@ -1,0 +1,396 @@
+{
+  "state": "unit-dependent-backend-support-reproduced",
+  "version": "0.1.4",
+  "module": "D:\\_Venvs\\chronoscope\\.venv-product\\Lib\\site-packages\\forecastscope\\diagnostics\\stationarity.py",
+  "source_sha256": "42490c61430e82012d163318fbf231a0a21c50b4e53ca9d2e1c58a13bf257029",
+  "fixture": "rng=default_rng(73019);rng.normal(size=240);x=3*sin(2*pi*arange(240)/12)+rng.normal(0,.05,240);y=u*(x+17)",
+  "rows": [
+    {
+      "scale": 1e-09,
+      "policy": "original",
+      "state": "pass",
+      "d": 0,
+      "D": 1,
+      "tests": [
+        {
+          "name": "ADF",
+          "stat": -4.257075811394562,
+          "pvalue": 0.0005267033311678002,
+          "crit": {
+            "1%": -3.4596204846395824,
+            "5%": -2.8744153028455948,
+            "10%": -2.5736320761218576
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Dickey & Fuller 1979, DOI 10.1080/01621459.1979.10482531"
+        },
+        {
+          "name": "KPSS",
+          "stat": 0.030446618110266766,
+          "pvalue": 0.1,
+          "crit": {
+            "10%": 0.347,
+            "5%": 0.463,
+            "2.5%": 0.574,
+            "1%": 0.739
+          },
+          "null": "stationary",
+          "stationary": true,
+          "reference": "Kwiatkowski, Phillips, Schmidt & Shin 1992, DOI 10.1016/0304-4076(92)90104-Y"
+        },
+        {
+          "name": "PhillipsPerron",
+          "stat": -3.486485544541341,
+          "pvalue": 0.008341033539993723,
+          "crit": {
+            "1%": -3.458010773719797,
+            "5%": -2.8737103617125186,
+            "10%": -2.5732559963936206
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Phillips & Perron 1988, DOI 10.1093/biomet/75.2.335"
+        },
+        {
+          "name": "DFGLS",
+          "stat": -0.8402184942294884,
+          "pvalue": 0.36136111064075016,
+          "crit": {
+            "1%": -2.6553570166859517,
+            "5%": -2.034861801073084,
+            "10%": -1.717185070751495
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": false,
+          "reference": "Elliott, Rothenberg & Stock 1996, DOI 10.2307/2171846"
+        },
+        {
+          "name": "ZivotAndrews",
+          "stat": -4.607224465861343,
+          "pvalue": 0.09068695183759694,
+          "crit": {
+            "1%": -5.27644,
+            "5%": -4.81067,
+            "10%": -4.56618
+          },
+          "null": "unit root with no break",
+          "stationary": false,
+          "reference": "Zivot & Andrews 1992, DOI 10.1080/07350015.1992.10509904",
+          "break_index": 53.0
+        }
+      ]
+    },
+    {
+      "scale": 1e-09,
+      "policy": "divide_by_maxabs",
+      "state": "pass",
+      "d": 0,
+      "D": 1,
+      "tests": [
+        {
+          "name": "ADF",
+          "stat": -4.257075789894515,
+          "pvalue": 0.0005267033758881919,
+          "crit": {
+            "1%": -3.4596204846395824,
+            "5%": -2.8744153028455948,
+            "10%": -2.5736320761218576
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Dickey & Fuller 1979, DOI 10.1080/01621459.1979.10482531"
+        },
+        {
+          "name": "KPSS",
+          "stat": 0.03044661811026653,
+          "pvalue": 0.1,
+          "crit": {
+            "10%": 0.347,
+            "5%": 0.463,
+            "2.5%": 0.574,
+            "1%": 0.739
+          },
+          "null": "stationary",
+          "stationary": true,
+          "reference": "Kwiatkowski, Phillips, Schmidt & Shin 1992, DOI 10.1016/0304-4076(92)90104-Y"
+        },
+        {
+          "name": "PhillipsPerron",
+          "stat": -3.486485544541332,
+          "pvalue": 0.008341033539993945,
+          "crit": {
+            "1%": -3.458010773719797,
+            "5%": -2.8737103617125186,
+            "10%": -2.5732559963936206
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Phillips & Perron 1988, DOI 10.1093/biomet/75.2.335"
+        },
+        {
+          "name": "DFGLS",
+          "stat": -0.8402184942294895,
+          "pvalue": 0.36136111064074977,
+          "crit": {
+            "1%": -2.6553570166859517,
+            "5%": -2.034861801073084,
+            "10%": -1.717185070751495
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": false,
+          "reference": "Elliott, Rothenberg & Stock 1996, DOI 10.2307/2171846"
+        },
+        {
+          "name": "ZivotAndrews",
+          "stat": -4.607224465789301,
+          "pvalue": 0.09068695185394335,
+          "crit": {
+            "1%": -5.27644,
+            "5%": -4.81067,
+            "10%": -4.56618
+          },
+          "null": "unit root with no break",
+          "stationary": false,
+          "reference": "Zivot & Andrews 1992, DOI 10.1080/07350015.1992.10509904",
+          "break_index": 53.0
+        }
+      ]
+    },
+    {
+      "scale": 1.0,
+      "policy": "original",
+      "state": "pass",
+      "d": 0,
+      "D": 1,
+      "tests": [
+        {
+          "name": "ADF",
+          "stat": -4.257075789894428,
+          "pvalue": 0.0005267033758883726,
+          "crit": {
+            "1%": -3.4596204846395824,
+            "5%": -2.8744153028455948,
+            "10%": -2.5736320761218576
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Dickey & Fuller 1979, DOI 10.1080/01621459.1979.10482531"
+        },
+        {
+          "name": "KPSS",
+          "stat": 0.030446618110267373,
+          "pvalue": 0.1,
+          "crit": {
+            "10%": 0.347,
+            "5%": 0.463,
+            "2.5%": 0.574,
+            "1%": 0.739
+          },
+          "null": "stationary",
+          "stationary": true,
+          "reference": "Kwiatkowski, Phillips, Schmidt & Shin 1992, DOI 10.1016/0304-4076(92)90104-Y"
+        },
+        {
+          "name": "PhillipsPerron",
+          "stat": -3.4864855445413,
+          "pvalue": 0.008341033539994809,
+          "crit": {
+            "1%": -3.458010773719797,
+            "5%": -2.8737103617125186,
+            "10%": -2.5732559963936206
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Phillips & Perron 1988, DOI 10.1093/biomet/75.2.335"
+        },
+        {
+          "name": "DFGLS",
+          "stat": -0.8402184942294774,
+          "pvalue": 0.36136111064075516,
+          "crit": {
+            "1%": -2.6553570166859517,
+            "5%": -2.034861801073084,
+            "10%": -1.717185070751495
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": false,
+          "reference": "Elliott, Rothenberg & Stock 1996, DOI 10.2307/2171846"
+        },
+        {
+          "name": "ZivotAndrews",
+          "stat": -4.607224467342275,
+          "pvalue": 0.09068695150157138,
+          "crit": {
+            "1%": -5.27644,
+            "5%": -4.81067,
+            "10%": -4.56618
+          },
+          "null": "unit root with no break",
+          "stationary": false,
+          "reference": "Zivot & Andrews 1992, DOI 10.1080/07350015.1992.10509904",
+          "break_index": 53.0
+        }
+      ]
+    },
+    {
+      "scale": 1.0,
+      "policy": "divide_by_maxabs",
+      "state": "pass",
+      "d": 0,
+      "D": 1,
+      "tests": [
+        {
+          "name": "ADF",
+          "stat": -4.257075789894584,
+          "pvalue": 0.0005267033758880479,
+          "crit": {
+            "1%": -3.4596204846395824,
+            "5%": -2.8744153028455948,
+            "10%": -2.5736320761218576
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Dickey & Fuller 1979, DOI 10.1080/01621459.1979.10482531"
+        },
+        {
+          "name": "KPSS",
+          "stat": 0.030446618110265562,
+          "pvalue": 0.1,
+          "crit": {
+            "10%": 0.347,
+            "5%": 0.463,
+            "2.5%": 0.574,
+            "1%": 0.739
+          },
+          "null": "stationary",
+          "stationary": true,
+          "reference": "Kwiatkowski, Phillips, Schmidt & Shin 1992, DOI 10.1016/0304-4076(92)90104-Y"
+        },
+        {
+          "name": "PhillipsPerron",
+          "stat": -3.4864855445413108,
+          "pvalue": 0.008341033539994531,
+          "crit": {
+            "1%": -3.458010773719797,
+            "5%": -2.8737103617125186,
+            "10%": -2.5732559963936206
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Phillips & Perron 1988, DOI 10.1093/biomet/75.2.335"
+        },
+        {
+          "name": "DFGLS",
+          "stat": -0.8402184942294573,
+          "pvalue": 0.36136111064076415,
+          "crit": {
+            "1%": -2.6553570166859517,
+            "5%": -2.034861801073084,
+            "10%": -1.717185070751495
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": false,
+          "reference": "Elliott, Rothenberg & Stock 1996, DOI 10.2307/2171846"
+        },
+        {
+          "name": "ZivotAndrews",
+          "stat": -4.607224467462044,
+          "pvalue": 0.0906869514743956,
+          "crit": {
+            "1%": -5.27644,
+            "5%": -4.81067,
+            "10%": -4.56618
+          },
+          "null": "unit root with no break",
+          "stationary": false,
+          "reference": "Zivot & Andrews 1992, DOI 10.1080/07350015.1992.10509904",
+          "break_index": 53.0
+        }
+      ]
+    },
+    {
+      "scale": 1000000000.0,
+      "policy": "original",
+      "state": "error",
+      "exception_type": "InfeasibleTestException",
+      "error": "The maximum lag you are considering (15) results in an ADF regression with a\nsingular regressor matrix after including 14 lags, and so a specification test be\nrun. This may occur if your series have little variation and so is locally constant,\nor may occur if you are attempting to test a very short series. You can manually set\nmaximum lag length to consider smaller models."
+    },
+    {
+      "scale": 1000000000.0,
+      "policy": "divide_by_maxabs",
+      "state": "pass",
+      "d": 0,
+      "D": 1,
+      "tests": [
+        {
+          "name": "ADF",
+          "stat": -4.257075789894428,
+          "pvalue": 0.0005267033758883726,
+          "crit": {
+            "1%": -3.4596204846395824,
+            "5%": -2.8744153028455948,
+            "10%": -2.5736320761218576
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Dickey & Fuller 1979, DOI 10.1080/01621459.1979.10482531"
+        },
+        {
+          "name": "KPSS",
+          "stat": 0.030446618110266725,
+          "pvalue": 0.1,
+          "crit": {
+            "10%": 0.347,
+            "5%": 0.463,
+            "2.5%": 0.574,
+            "1%": 0.739
+          },
+          "null": "stationary",
+          "stationary": true,
+          "reference": "Kwiatkowski, Phillips, Schmidt & Shin 1992, DOI 10.1016/0304-4076(92)90104-Y"
+        },
+        {
+          "name": "PhillipsPerron",
+          "stat": -3.4864855445413214,
+          "pvalue": 0.008341033539994222,
+          "crit": {
+            "1%": -3.458010773719797,
+            "5%": -2.8737103617125186,
+            "10%": -2.5732559963936206
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": true,
+          "reference": "Phillips & Perron 1988, DOI 10.1093/biomet/75.2.335"
+        },
+        {
+          "name": "DFGLS",
+          "stat": -0.8402184942294773,
+          "pvalue": 0.36136111064075527,
+          "crit": {
+            "1%": -2.6553570166859517,
+            "5%": -2.034861801073084,
+            "10%": -1.717185070751495
+          },
+          "null": "unit root (non-stationary)",
+          "stationary": false,
+          "reference": "Elliott, Rothenberg & Stock 1996, DOI 10.2307/2171846"
+        },
+        {
+          "name": "ZivotAndrews",
+          "stat": -4.607224467345525,
+          "pvalue": 0.09068695150083378,
+          "crit": {
+            "1%": -5.27644,
+            "5%": -4.81067,
+            "10%": -4.56618
+          },
+          "null": "unit root with no break",
+          "stationary": false,
+          "reference": "Zivot & Andrews 1992, DOI 10.1080/07350015.1992.10509904",
+          "break_index": 53.0
+        }
+      ]
+    }
+  ]
+}

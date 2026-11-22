@@ -50,7 +50,15 @@ def arch_lm(x, nlags: int = 12, alpha: float = 0.05, demean: bool = True) -> Arc
     from statsmodels.stats.diagnostic import het_arch
 
     a = _clean(x)
+    if len(a) < 2 or np.ptp(a) == 0:
+        raise ValueError("ARCH-LM requires varying finite observations")
     resid = a - a.mean() if demean else a
+    # Squared residuals enter an auxiliary regression with a constant. Keep its
+    # rank/conditioning independent of the original measurement unit.
+    magnitude = float(np.max(np.abs(resid)))
+    resid = resid / magnitude
+    if np.ptp(resid ** 2) == 0:
+        raise ValueError("ARCH-LM is undefined for constant squared residuals")
     lm_stat, lm_p, f_stat, f_p = het_arch(resid, nlags=nlags)
     return ArchTest(
         lm_stat=float(lm_stat), lm_pvalue=float(lm_p), f_stat=float(f_stat), f_pvalue=float(f_p),
