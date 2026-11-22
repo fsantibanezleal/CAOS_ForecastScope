@@ -1,58 +1,58 @@
 {
-  "state": "published 0.1.0; app adoption pending",
-  "version": "0.1.0",
+  "state": "published 0.1.2; application admission and deployment are separate",
+  "version": "0.1.2",
+  "source_commit": "535282d477018f4dce1c161ec46fac2b16d48c2a",
   "checks": [
     {
-      "check": "source core controls",
-      "passed": 31,
-      "python": "3.13.14",
-      "numpy": "2.4.6"
-    },
-    {
       "check": "complete installed-wheel diagnostic and core suite",
-      "passed": 128,
-      "warnings_retained": 35,
+      "passed": 145,
+      "warnings_retained": 36,
       "python": "3.12.10",
       "numpy": "2.5.4"
     },
     {
-      "check": "isolated installed wheel without SciPy or product package",
-      "passed": 31,
-      "python": "3.12.10"
+      "check": "independent dimensional and degeneracy controls",
+      "passed": 14
     },
     {
-      "check": "exact product forecast and combination comparisons",
-      "passed": 150,
-      "cases": 15
+      "check": "exact historical forecast/combination parity",
+      "comparisons": 150,
+      "cases": 15,
+      "scope": "Full-precision quantiles, allocation weights and historical origins on all shipped benchmark histories"
     },
     {
-      "check": "wheel and sdist metadata",
+      "check": "Ruff",
       "state": "pass"
     },
     {
-      "check": "declared dependencies",
-      "state": "no broken requirements"
-    },
-    {
-      "check": "Ruff current source tests and parity tooling",
+      "check": "source/wheel metadata",
       "state": "pass"
-    }
-  ],
-  "retained_failures": [
-    {
-      "check": "initial optional diagnostic suite",
-      "passed": 125,
-      "failed": 1,
-      "reason": "Missing coreforecast declaration for Guerrero seasonal Box-Cox; dependency added and complete suite rerun"
     },
     {
-      "check": "first current-Ruff check",
-      "reason": "New lint rules found import/order/normalization and silent optional-error handling; corrected, no rules disabled"
+      "check": "public PyPI wheel source-member SHA256",
+      "matched": 19
+    },
+    {
+      "check": "separate candidate/develop/main CI",
+      "state": "all jobs passed",
+      "runs": [
+        44986345911,
+        44986542747,
+        44986734098
+      ]
+    },
+    {
+      "check": "trusted PyPI publication",
+      "state": "pass",
+      "run": 44986857877
+    },
+    {
+      "check": "downloaded public-wheel API and dimensional controls",
+      "passed": 32,
+      "warnings_retained": 1
     }
   ],
-  "limits": [
-    "These are numerical and packaging controls, not a new forecasting accuracy trial",
-    "PyPI publication and Linux CI are verified separately in the publication receipt; app migration and its own release gates remain pending"
-  ],
-  "publication_receipt": "docs/publication-0.1.0.json"
+  "historical_validation": "docs/validation-0.1.0.json",
+  "publication": "docs/publication-0.1.2.json",
+  "scope": "Numerical unit correctness and explicit degeneracy policies. No new accuracy experiment or general superiority claim."
 }

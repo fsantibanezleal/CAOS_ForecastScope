@@ -1,0 +1,54 @@
+{
+  "state": "published registry files verified",
+  "version": "0.1.2",
+  "source_commit": "535282d477018f4dce1c161ec46fac2b16d48c2a",
+  "candidate_commit": "8ed6ae28db7a7f9eaa64f9e6ace167ed61534f03",
+  "candidate_ci": 44986345911,
+  "develop_ci": 44986542747,
+  "main_ci": 44986734098,
+  "publish_workflow": 44986857877,
+  "verified_module_count": 19,
+  "index": "https://pypi.org/project/forecastscope/0.1.2/",
+  "distributions": [
+    {
+      "filename": "forecastscope-0.1.2-py3-none-any.whl",
+      "size": 58469,
+      "sha256": "3234fcd3d6d6b172d6dbf3143382174dfc998f94c6460c888d656472ae2290af",
+      "upload_time": "2026-11-22T04:51:50.773100Z"
+    },
+    {
+      "filename": "forecastscope-0.1.2.tar.gz",
+      "size": 73900,
+      "sha256": "0efd6a3e51140767f5b1013df3971dce3771a30d38a313fb24315f9f5c32d6b1",
+      "upload_time": "2026-11-22T04:51:52.124318Z"
+    }
+  ],
+  "validation": {
+    "installed_wheel_tests": 145,
+    "warnings_retained": 36,
+    "independent_dimensional_controls": 14,
+    "exact_forecast_combination_comparisons": 150,
+    "comparison_histories": 15
+  },
+  "source_members_sha256": {
+    "forecastscope/__init__.py": "a1f9584b6a023c6e6e575ba00a2c67fbf7be71a6949e1137fe3d8ec43c42862d",
+    "forecastscope/api.py": "a38e0890176eaa1980a5bfb39fb852c00d17799f4901bb768805ec94ead4e830",
+    "forecastscope/combinations/__init__.py": "95eae7e616908c6d993649984747d2c09f6026fb0f9b1ff4830153e2e1926a3b",
+    "forecastscope/combinations/context_memory.py": "738a34f04efbfa1246e73d71512189c3a5276ba9fdc13e907714cae139d7093f",
+    "forecastscope/combinations/validated.py": "d5baf809bb79bd5f1dd6f996741e40f8a5cd7fa6eaa86ff11dee54696a9edcfa",
+    "forecastscope/diagnostics/__init__.py": "0082636cf6110170eb52fa6f9067d34492aa21027772e19acc4030f49d195d46",
+    "forecastscope/diagnostics/autocorrelation.py": "a05b538d3d89d4a11081ab35e9ff01430157571063a5dae9af65d7127e110552",
+    "forecastscope/diagnostics/causality.py": "958d4e55f1d4297c80434091e534e9652a2dc5ddab4116ab876fb8dfef01b457",
+    "forecastscope/diagnostics/changepoints.py": "e5bb46ccc417ae4066e1f65a13bc18abadcfc31a9a0d578ffa227b97773cc7d7",
+    "forecastscope/diagnostics/distribution.py": "39d3ce3d551727d44963bfdbcaae0723f6673639fe83a3267cdef75224b59889",
+    "forecastscope/diagnostics/filters.py": "12a85b23ab530c1d20a960dc2d97d109d2fc3fda67a82777c56cc3a446487bcc",
+    "forecastscope/diagnostics/fractal.py": "c4c9752da0abee7d29eec8dd28445b2ebc8d7db49a5264d6e2406019bc3087cc",
+    "forecastscope/diagnostics/nonlinear.py": "d3d139e2a65716fdf9471335101677a01508cd2ac0f972679c8ff825faadbc18",
+    "forecastscope/diagnostics/seasonality.py": "170f73cdfc98ca4e840fb7930eec7d771b9ec354f2e29e3c8cd034d591c2c76a",
+    "forecastscope/diagnostics/sequence.py": "a89bc7f5353fa892e99fc76383434bdc9d717d988a6942bc6c44fbe0a891c8da",
+    "forecastscope/diagnostics/stationarity.py": "42490c61430e82012d163318fbf231a0a21c50b4e53ca9d2e1c58a13bf257029",
+    "forecastscope/diagnostics/volatility.py": "24a6f0f394970bed74c967ac898dcca44f0aa963509291b98fead415ad0564e7",
+    "forecastscope/forecasting.py": "3e92b93de74d4c44ca9956cab4f5cbb5e0b6d3781a962d197086e722826ae123",
+    "forecastscope/types.py": "223748654bfe59dc6579fb8b2e55f75856df244d9885149dc63ec0d7372e43cf"
+  }
+}
