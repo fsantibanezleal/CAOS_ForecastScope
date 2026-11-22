@@ -12,7 +12,7 @@ from forecastscope.forecasting import mf_from_quantiles
 @pytest.mark.parametrize("level", [0.1, 1e-14, 1e12])
 def test_exact_constant_decomposition_strengths_do_not_follow_summation_roundoff(level):
     pytest.importorskip("statsmodels")
-    from forecastscope.diagnostics.seasonality import seasonal_strength, stl_decompose, mstl_decompose
+    from forecastscope.diagnostics.seasonality import mstl_decompose, seasonal_strength, stl_decompose
 
     values = np.full(120, level)
     zeros = np.zeros_like(values)
