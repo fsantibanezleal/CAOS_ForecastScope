@@ -58,3 +58,8 @@ constant observations have one PELT regime; non-l2 PELT costs require a caller-s
 penalty in the cost's units. Cross-correlation requires both series to vary and
 normalizes their units independently before multiplication. Forecast result
 objects retain the computed floating-point paths without decimal rounding.
+
+Version 0.1.3 also assigns zero seasonal and trend strengths to exactly constant
+observations, including decimal levels for which floating-point variance may be
+nonzero. The same policy applies to public seasonal strength, STL and MSTL results.
+See [the verified publication receipt](docs/publication-0.1.3.json).
