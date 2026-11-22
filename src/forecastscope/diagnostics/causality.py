@@ -60,10 +60,18 @@ def cross_correlation(x, y, max_lag: int = 40) -> CrossCorrelation:
     a, b = _clean_pair(x, y)
     n = len(a)
     max_lag = min(max_lag, n - 1)
-    am, bm = a - a.mean(), b - b.mean()
-    denom = float(np.sqrt(np.sum(am ** 2) * np.sum(bm ** 2)))
-    if denom == 0:
-        denom = 1e-12
+    if n < 2:
+        raise ValueError("Cross-correlation requires two varying series with a finite observable scale")
+    # Normalize each observable independently before centering or forming products.
+    # The raw product of two sums of squares can underflow despite both series varying.
+    scales = float(np.max(np.abs(a))), float(np.max(np.abs(b)))
+    if min(scales) <= 0:
+        raise ValueError("Cross-correlation requires two varying series with a finite observable scale")
+    am, bm = a / scales[0], b / scales[1]
+    am, bm = am - am.mean(), bm - bm.mean()
+    denom = float(np.linalg.norm(am) * np.linalg.norm(bm))
+    if not np.isfinite(denom) or denom <= 0:
+        raise ValueError("Cross-correlation requires two varying series with a finite observable scale")
     lags = np.arange(-max_lag, max_lag + 1)
     values = np.empty(len(lags))
     for i, k in enumerate(lags):

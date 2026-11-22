@@ -206,9 +206,9 @@ def mf_from_quantiles(name: str, family: str, cols: np.ndarray, levels: tuple[fl
     point_col = int(np.argmin([abs(lv - 0.5) for lv in levels]))
     return MethodForecast(
         name=name, family=family,
-        point=tuple(round(float(v), 6) for v in cols[:, point_col]),
-        lower=tuple(round(float(v), 6) for v in cols[:, 0]),
-        upper=tuple(round(float(v), 6) for v in cols[:, -1]),
+        point=tuple(float(v) for v in cols[:, point_col]),
+        lower=tuple(float(v) for v in cols[:, 0]),
+        upper=tuple(float(v) for v in cols[:, -1]),
     )
 
 

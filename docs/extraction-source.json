@@ -2,39 +2,46 @@
   "source_repository": "https://github.com/fsantibanezleal/CAOS_RES_ChronoScope",
   "source_commit": "9bda497e29f1705939e15e96e68dbd9f35a6dcfa",
   "licence": "MIT",
-  "scope": "Initial extraction candidate; not a published dependency or product migration",
+  "scope": "Published reusable numerical library; application migration and historical study bindings remain separate.",
   "files": {
     "forecasting.py": {
       "source_path": "data-pipeline/chronoscopelab/model/forecasters.py",
       "source_sha256": "940c194ab85fe9d2ccbd58b89b986c1e0bb580298954f06a8793117b6469e664",
-      "extracted_sha256": "f10386d4ee119ed4b2075e245249fd570eb958e495c5109cdc872f5612a132e0",
+      "extracted_sha256": "3e92b93de74d4c44ca9956cab4f5cbb5e0b6d3781a962d197086e722826ae123",
       "initial_extracted_sha256": "373d0243cdf8e5fb5bb3b9d411466bb486dc6625ac8825c50815863df712f73f",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
-      "current_ast_changes": [],
-      "current_change": "Linter normalization; explicit unavailable-diagnostic warnings where applicable; numerical parity measured separately"
+      "current_ast_changes": [
+        "mf_from_quantiles"
+      ],
+      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
     },
     "combinations/context_memory.py": {
       "source_path": "data-pipeline/chronoscopelab/model/context_memory.py",
       "source_sha256": "dbafac6c79f05a562718e217113c170aac6a968ddbae6bf723e8e5e7292fc5ad",
-      "extracted_sha256": "b20f37561e9eceb338a164a824b4bb23df83029978384335793a4d7d8da0b80d",
+      "extracted_sha256": "738a34f04efbfa1246e73d71512189c3a5276ba9fdc13e907714cae139d7093f",
       "initial_extracted_sha256": "b20f37561e9eceb338a164a824b4bb23df83029978384335793a4d7d8da0b80d",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
-      "current_ast_changes": [],
-      "current_change": "Linter normalization; explicit unavailable-diagnostic warnings where applicable; numerical parity measured separately"
+      "current_ast_changes": [
+        "_memory",
+        "_scale",
+        "context_features"
+      ],
+      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
     },
     "combinations/validated.py": {
       "source_path": "data-pipeline/chronoscopelab/model/validated_combination.py",
       "source_sha256": "dfbf1940dd6bd4832e234cc2f1efb28b06d5b4f72f6006e9b49f551918c88c95",
-      "extracted_sha256": "cc9d4494394ac0b02ce17eb2464d4e9e54875c716781d9f0d50dd5a43a9f635d",
+      "extracted_sha256": "d5baf809bb79bd5f1dd6f996741e40f8a5cd7fa6eaa86ff11dee54696a9edcfa",
       "initial_extracted_sha256": "4bb43a8f0a325e5033844a3a0990acde68c14c31a3a324f5acbb9b53beb8171b",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
       "current_ast_changes": [
-        "fit_validated"
+        "fit_validated",
+        "memory"
       ],
-      "current_change": "Linter normalization; explicit unavailable-diagnostic warnings where applicable; numerical parity measured separately"
+      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
     },
     "diagnostics/autocorrelation.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/autocorrelation.py",
@@ -49,27 +56,29 @@
     "diagnostics/causality.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/causality.py",
       "source_sha256": "e9b8fe8bc9b64a5cadf0e7accc2fae0b322fa1511958c375828f8ffede840c01",
-      "extracted_sha256": "f10c2313e4f25f3cda929ed2db6193e45ab05bdc366cf76962809a8233526ae8",
+      "extracted_sha256": "958d4e55f1d4297c80434091e534e9652a2dc5ddab4116ab876fb8dfef01b457",
       "initial_extracted_sha256": "e9b8fe8bc9b64a5cadf0e7accc2fae0b322fa1511958c375828f8ffede840c01",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
       "current_ast_changes": [
-        "causality_report"
+        "causality_report",
+        "cross_correlation"
       ],
-      "current_change": "Linter normalization; explicit unavailable-diagnostic warnings where applicable; numerical parity measured separately"
+      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
     },
     "diagnostics/changepoints.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/changepoints.py",
       "source_sha256": "dc0ce4fcb0eae8ca1b58bcf12046d09298d9807ce83e3d9344528a583b8e1466",
-      "extracted_sha256": "c482aea7728181e162c951da5f6e787ab89c958da9fa7f7717a882bb327551c2",
+      "extracted_sha256": "e5bb46ccc417ae4066e1f65a13bc18abadcfc31a9a0d578ffa227b97773cc7d7",
       "initial_extracted_sha256": "dc0ce4fcb0eae8ca1b58bcf12046d09298d9807ce83e3d9344528a583b8e1466",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
       "current_ast_changes": [
         "_segments",
-        "changepoints_report"
+        "changepoints_report",
+        "pelt"
       ],
-      "current_change": "Linter normalization; explicit unavailable-diagnostic warnings where applicable; numerical parity measured separately"
+      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
     },
     "diagnostics/distribution.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/distribution.py",
@@ -125,14 +134,15 @@
     "diagnostics/seasonality.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/seasonality.py",
       "source_sha256": "99c328fdb6b792b73485928146313e613f9c3ba354b1760e82e8bdd7e50b7cbb",
-      "extracted_sha256": "c9c41ae90230eef5e3eec723a44792476ed57646ca1af1f11b6e5ee9bb9a5ace",
+      "extracted_sha256": "170f73cdfc98ca4e840fb7930eec7d771b9ec354f2e29e3c8cd034d591c2c76a",
       "initial_extracted_sha256": "99c328fdb6b792b73485928146313e613f9c3ba354b1760e82e8bdd7e50b7cbb",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",
       "current_ast_changes": [
+        "_strengths",
         "seasonality_report"
       ],
-      "current_change": "Linter normalization; explicit unavailable-diagnostic warnings where applicable; numerical parity measured separately"
+      "current_change": "Published numerical units correction in 0.1.2; exact zero-scale policy and full-precision results documented in CHANGELOG.md. Original source identity remains unchanged."
     },
     "diagnostics/sequence.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/sequence.py",
@@ -159,7 +169,7 @@
     "diagnostics/volatility.py": {
       "source_path": "data-pipeline/chronoscopelab/analysis/volatility.py",
       "source_sha256": "38685dc0684377d816ead19cff357c75caef68c5db7038fb9c5c96ad213978c0",
-      "extracted_sha256": "1113870a8749f528821265c14fe0998fd936521704aaca50c2e60d5102997215",
+      "extracted_sha256": "24a6f0f394970bed74c967ac898dcca44f0aa963509291b98fead415ad0564e7",
       "initial_extracted_sha256": "38685dc0684377d816ead19cff357c75caef68c5db7038fb9c5c96ad213978c0",
       "initial_function_and_class_bodies": "AST-identical to origin",
       "initial_change": "import relocation and module documentation only; no function or class body change",

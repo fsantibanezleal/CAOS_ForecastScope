@@ -38,8 +38,11 @@ def context_features(y: np.ndarray, m: int) -> np.ndarray:
     if w < 2:
         return np.zeros(4)
     recent, previous = y[-w:], y[-2 * w:-w]
-    scale = float(np.std(y[-2 * w:]))
-    if scale < 1e-12:
+    window = y[-2 * w:]
+    if np.ptp(window) == 0:
+        return np.zeros(4)
+    scale = float(np.std(window))
+    if not np.isfinite(scale) or scale <= 0:
         return np.zeros(4)
     half = max(1, w // 2)
     slope = (np.mean(recent[-half:]) - np.mean(recent[:half])) / scale
@@ -49,15 +52,17 @@ def context_features(y: np.ndarray, m: int) -> np.ndarray:
     periodicity = 0.0
     if m >= 2 and len(y) >= 2 * m + 2:
         a, b = y[-2 * m:-m], y[-m:]
-        if np.std(a) > 1e-12 and np.std(b) > 1e-12:
+        if np.std(a) > 0 and np.std(b) > 0:
             periodicity = float(np.corrcoef(a, b)[0, 1])
     return np.clip([slope, shift, volatility, periodicity], -4, 4)
 
 
 def _scale(y: np.ndarray, m: int) -> float:
+    if np.ptp(y) == 0:
+        return 0.0
     lag = max(1, min(m, len(y) - 1))
     value = float(np.mean(np.abs(y[lag:] - y[:-lag])))
-    return value if value > 1e-12 else max(float(np.std(y)), 1e-12)
+    return value if value > 0 else float(np.std(y))
 
 
 @lru_cache(maxsize=64)
@@ -67,15 +72,19 @@ def _memory(values: tuple[float, ...], m: int, h: int):
     if last < first:
         return (), np.empty((0, 4)), np.empty((0, len(METHODS)))
     origins = tuple(int(o) for o in np.unique(np.linspace(first, last, CONFIG["memory_origins"], dtype=int)))
-    features, losses = [], []
+    admitted, features, losses = [], [], []
     for origin in origins:
         history, truth = y[:origin], y[origin:origin + h]
+        scale = _scale(history, m)
+        if not np.isfinite(scale) or scale <= 0:
+            continue  # A constant prefix has no observable scale for normalized loss.
+        admitted.append(origin)
         features.append(context_features(history, m))
         losses.append([
-            float(np.mean(np.abs(fn(history, m, h)[0] - truth))) / _scale(history, m)
+            float(np.mean(np.abs(fn(history, m, h)[0] - truth))) / scale
             for _, _, fn in METHODS
         ])
-    return origins, np.asarray(features), np.asarray(losses)
+    return tuple(admitted), np.asarray(features).reshape(-1, 4), np.asarray(losses).reshape(-1, len(METHODS))
 
 
 def fit_context_memory(y: np.ndarray, m: int, h: int, levels=(0.1, 0.5, 0.9), mode="context") -> MemoryFit:
