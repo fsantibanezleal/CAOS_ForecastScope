@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.01.004 - 2026-11-22
+
+- Restore the archived nonlinear report contract: the descriptive flag requires Lyapunov strictly above 0.01, zero-one K strictly above 0.5 and the surrogate flag. The numerical decision and seeded RANSAC/OLS algorithms were already unchanged; the previous description misstated its threshold and overstated the conclusion.
+- Add strict-boundary, surrogate-condition and isolated-RNG regressions, plus an explicit verified-archive diagnostic migration checker.
+
 ## 0.01.003 - 2026-11-22
 
 - Detect exactly constant decomposition inputs and components by their observed range. Floating summation error cannot turn their undefined strength into a unit-dependent value of one.
