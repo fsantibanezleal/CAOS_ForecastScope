@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.01.005 - 2026-11-22
+## [0.01.005] - 2026-11-22
 
 - Condition KPSS differencing recommendations on dimensionless deviations from the original prefix, rather than treating small measured values as constant via an absolute tolerance. Exact constants need no differences; accumulated floating arithmetic noise after differencing is not tested as a new process.
 - Route stationarity's seasonal-strength recommendation through the canonical reviewed seasonal helper, including its exact-constant policy. This removes the divergent duplicate implementation.
