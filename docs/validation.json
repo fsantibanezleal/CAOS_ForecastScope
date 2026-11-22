@@ -1,5 +1,5 @@
 {
-  "state": "published0.1.2; application admission and deployment are separate",
+  "state": "published 0.1.2; application admission and deployment are separate",
   "version": "0.1.2",
   "source_commit": "535282d477018f4dce1c161ec46fac2b16d48c2a",
   "checks": [
@@ -29,12 +29,12 @@
       "state": "pass"
     },
     {
-      "check": "publicPyPI wheel source-member SHA256",
+      "check": "public PyPI wheel source-member SHA256",
       "matched": 19
     },
     {
       "check": "separate candidate/develop/main CI",
-      "state": "alljobs passed",
+      "state": "all jobs passed",
       "runs": [
         44986345911,
         44986542747,
@@ -42,9 +42,14 @@
       ]
     },
     {
-      "check": "trustedPyPI publication",
+      "check": "trusted PyPI publication",
       "state": "pass",
       "run": 44986857877
+    },
+    {
+      "check": "downloaded public-wheel API and dimensional controls",
+      "passed": 32,
+      "warnings_retained": 1
     }
   ],
   "historical_validation": "docs/validation-0.1.0.json",
